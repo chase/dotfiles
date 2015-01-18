@@ -1,0 +1,122 @@
+" Mapping
+let mapleader = ","
+set autochdir
+
+" Disable Janus Plugins
+call janus#disable_plugin('vroom')
+call janus#disable_plugin('vim-trailing-whitespace')
+call janus#disable_plugin('snipmate')
+call janus#disable_plugin('supertab')
+call janus#disable_plugin('ctrlp')
+call janus#disable_plugin('nerdtree')
+" Disable Janus's markdown autostyling
+let g:disable_markdown_autostyle = 1
+
+let g:tagbar_type_javascript = { 'ctagsbin' : '/usr/bin/jsctags' }
+let g:tagbar_type_coffee = {
+    \ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+        \ 't:gulp tasks',
+        \ 'v:variables',
+        \ 'f:functions',
+        \ 'c:classes',
+        \ 'm:methods',
+        \ 's:static properties',
+        \ 'p:properties',
+    \ ]
+\ }
+let g:tagbar_type_moon = {
+    \ 'ctagstype' : 'moonscript',
+    \ 'kinds'     : [
+        \ 'v:variables',
+        \ 'f:functions',
+        \ 'c:classes',
+        \ 'm:methods',
+        \ 's:static properties',
+        \ 'p:properties',
+    \ ]
+\ }
+
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+let g:vimfiler_tree_leaf_icon = "┊"
+let g:vimfiler_tree_opened_icon = "▼"
+let g:vimfiler_tree_closed_icon = "►"
+let g:vimfiler_readonly_file_icon = ""
+let g:vimfiler_marked_file_icon = "◉"
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_enable_auto_cd = 1
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme='focuspoint'
+
+" {{{ Neocomplete
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#enable_fuzzy_completion = 0
+
+" Shell style
+let g:neocomplete#disable_auto_complete = 1
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist'
+\ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Clang support
+let g:marching_clang_command = "/usr/bin/clang"
+let g:marching_enable_neocomplete = 1
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+let g:neocomplete#force_omni_input_patterns.python = ''
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" }}}
+
+let g:arpeggio_timeoutlen = 22
+
+" iPython
+let g:ipy_perform_mappings = 0
+let g:ipy_completefunc = 'local'
+
+" Ultisnips! (Plays nicely with neocomplete) {{{
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
+
+
+" Go! {{{
+let g:go_auto_type_info = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+" }}}

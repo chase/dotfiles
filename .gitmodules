@@ -1,0 +1,72 @@
+[submodule "janus/Vim-Jinja2-Syntax"]
+	path = janus/Vim-Jinja2-Syntax
+	url = git@github.com:chase/Vim-Jinja2-Syntax.git
+[submodule "janus/emmet-vim"]
+	path = janus/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
+[submodule "janus/focuspoint-vim"]
+	path = janus/focuspoint-vim
+	url = git@github.com:chase/focuspoint-vim.git
+[submodule "janus/goyo.vim"]
+	path = janus/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
+[submodule "janus/moonscript-vim"]
+	path = janus/moonscript-vim
+	url = git://github.com/leafo/moonscript-vim.git
+[submodule "janus/neocomplete.vim"]
+	path = janus/neocomplete.vim
+	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "janus/neomru.vim"]
+	path = janus/neomru.vim
+	url = https://github.com/Shougo/neomru.vim.git
+[submodule "janus/ultisnips"]
+	path = janus/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "janus/unite.vim"]
+	path = janus/unite.vim
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "janus/vala-vim"]
+	path = janus/vala-vim
+	url = https://github.com/dbellavista/vala-vim.git
+[submodule "janus/vim-airline"]
+	path = janus/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "janus/vim-airline-focuspoint"]
+	path = janus/vim-airline-focuspoint
+	url = git@github.com:chase/vim-airline-focuspoint.git
+[submodule "janus/vim-ansible-yaml"]
+	path = janus/vim-ansible-yaml
+	url = git@github.com:chase/vim-ansible-yaml.git
+[submodule "janus/vim-arpeggio"]
+	path = janus/vim-arpeggio
+	url = https://github.com/kana/vim-arpeggio.git
+[submodule "janus/vim-easy-align"]
+	path = janus/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "janus/vim-foldfocus"]
+	path = janus/vim-foldfocus
+	url = git@github.com:chase/vim-foldfocus.git
+[submodule "janus/vim-go"]
+	path = janus/vim-go
+	url = git://github.com/fatih/vim-go.git
+[submodule "janus/vim-indent-guides"]
+	path = janus/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "janus/vim-ipython"]
+	path = janus/vim-ipython
+	url = https://github.com/ivanov/vim-ipython.git
+[submodule "janus/vim-marching"]
+	path = janus/vim-marching
+	url = https://github.com/osyo-manga/vim-marching.git
+[submodule "janus/vim-origami"]
+	path = janus/vim-origami
+	url = https://github.com/kshenoy/vim-origami.git
+[submodule "janus/vim-sleuth"]
+	path = janus/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth.git
+[submodule "janus/vimfiler.vim"]
+	path = janus/vimfiler.vim
+	url = https://github.com/Shougo/vimfiler.vim.git
+[submodule "janus/vimproc.vim"]
+	path = janus/vimproc.vim
+	url = https://github.com/Shougo/vimproc.vim.git
