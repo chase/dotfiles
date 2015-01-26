@@ -120,3 +120,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 " }}}
+
+" Get rid of the annoying preview window
+set completeopt-=preview
