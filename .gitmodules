@@ -46,9 +46,6 @@
 [submodule "janus/vim-foldfocus"]
 	path = janus/vim-foldfocus
 	url = git@github.com:chase/vim-foldfocus.git
-[submodule "janus/vim-go"]
-	path = janus/vim-go
-	url = git://github.com/fatih/vim-go.git
 [submodule "janus/vim-indent-guides"]
 	path = janus/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
