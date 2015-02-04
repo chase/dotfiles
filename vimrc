@@ -14,7 +14,6 @@ endif
 
 let mapleader = ","
 set number
-set autochdir
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
 
@@ -250,7 +249,6 @@ omap w   <Plug>(easymotion-wl)
 omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
-nmap <silent> <Leader>, :VimFilerExplorer<CR>
 nnoremap <silent> <Leader>n :VimFilerExplorer<CR>
 nmap <silent> <Leader>s :shell<CR>
 
@@ -348,3 +346,8 @@ endfunction
 
 " Handle terminal resize
 autocmd VimResized * :wincmd =
+
+augroup DetectIndent
+    autocmd!
+    autocmd BufReadPost * DetectIndent
+augroup END
