@@ -8,6 +8,8 @@ if has('vim_starting')
     endif
 
     set runtimepath+=~/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/.vim/hilinks/
+    set runtimepath+=~/.vim/print-bw/
 endif
 
 let mapleader = ","

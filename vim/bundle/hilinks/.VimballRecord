@@ -1,1 +1,0 @@
-hilinks.vba: call delete('/home/chase/.janus/hilinks/plugin/hilinks.vim')|call delete('/home/chase/.janus/hilinks/doc/hilinks.txt')
