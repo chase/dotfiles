@@ -37,6 +37,7 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_fuzzy_completion = 0
 
 " Shell style
+let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#disable_auto_complete = 1
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
@@ -280,7 +281,7 @@ inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
 " For smart TAB completion {{
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ neocomplete#start_manual_complete()
+    \ neocomplete#start_manual_complete()."\<C-n>"
 function! s:check_back_space()
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
