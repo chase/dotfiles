@@ -61,6 +61,9 @@ if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
 
+let g:neocomplete#force_omni_input_patterns.go =
+            \ '[^.[:digit:] *\t]\.'
+
 let g:neocomplete#force_omni_input_patterns.cpp =
             \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
@@ -127,6 +130,7 @@ let g:indent_guides_guide_size = 1
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': [],
   \ 'passive_filetypes': ['cpp','c','h'] }
+let g:syntastic_go_checkers=['gofmt']
 " }}}
 " }}}
 
