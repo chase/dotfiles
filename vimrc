@@ -264,6 +264,9 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 " Shift-insert for mouse-less middle-click
 map! <S-Insert> <MiddleMouse>
 
+" NerdCommenter!
+map! <Leader>/ <plug>NERDCommenterToggle<CR>
+
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
 inoremap <expr><C-l> neocomplete#complete_common_string()
