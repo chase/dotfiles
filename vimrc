@@ -197,6 +197,7 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
 NeoBundle 'ivanov/vim-ipython'
+NeoBundle 'jdonaldson/vaxe'
 
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'
