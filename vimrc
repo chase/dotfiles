@@ -154,7 +154,7 @@ NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'ap/vim-css-color'
 NeoBundle 'majutsushi/tagbar'
-NeoBundle 'rgarver/Kwbd.vim' " :Bclose (close buffer, keep window)
+NeoBundle 'rgarver/Kwbd.vim' " :Kwbd (close buffer, keep window)
 NeoBundle 'roryokane/detectindent'
 
 " Tools
