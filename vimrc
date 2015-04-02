@@ -313,7 +313,7 @@ augroup ipython
     autocmd FileType python
                 \ call system('pgrep -c ipython2') |
                 \ if v:shell_error |
-                \   call dispatch#start_command(1, 'ipython2 kernel') |
+                \   call system('ipython2 kernel &>/dev/null &!')
                 \ endif |
                 \ call UpIPython()
 augroup END
