@@ -271,7 +271,7 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 map! <S-Insert> <MiddleMouse>
 
 " NerdCommenter!
-map! <Leader>/ <plug>NERDCommenterToggle<CR>
+nmap <Leader>/ <plug>NERDCommenterToggle<CR>
 
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
