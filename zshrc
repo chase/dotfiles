@@ -15,10 +15,10 @@ DEFAULT_USER="chase"
 CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=30
+#export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -90,7 +90,7 @@ alias gcs='gsc'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -selection clipboard -o'
 alias tarball='tar -czf'
-alias haxe='sudo docker run --name haxe --rm -v "$(pwd)":/tmp/haxe -w /tmp/haxe jeko/haxe-openfl haxe'
+alias dhaxe='sudo docker run --name haxe --rm -v "$(pwd)":/tmp/haxe -w /tmp/haxe jeko/haxe-openfl'
 
 function ex ()
 {
