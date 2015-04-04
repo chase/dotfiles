@@ -90,7 +90,6 @@ alias gcs='gsc'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -selection clipboard -o'
 alias tarball='tar -czf'
-alias dhaxe='sudo docker run --name haxe --rm -v "$(pwd)":/tmp/haxe -w /tmp/haxe jeko/haxe-openfl'
 
 function ex ()
 {
