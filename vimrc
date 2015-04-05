@@ -62,17 +62,20 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 
 let g:neocomplete#force_omni_input_patterns.go =
-            \ '[^.[:digit:] *\t]\.'
+    \ '[^.[:digit:] *\t]\.'
 
 let g:neocomplete#force_omni_input_patterns.cpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
-let g:neocomplete#force_omni_input_patterns.python = ''
+let g:neocomplete#force_omni_input_patterns.python =
+    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType python setlocal omnifunc=jedi#completions
 " }}}
 " Ultisnips (Plays nicely with neocomplete) {{{
 let g:UltiSnipsExpandTrigger="<c-l>"
@@ -132,6 +135,18 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'passive_filetypes': ['cpp','c','h'] }
 let g:syntastic_go_checkers=['gofmt']
 " }}}
+" {{{ Jedi (Python code complete)
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "gd"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = ""
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
+
+" Use Neocomplete for completion menu, not Jedi
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+" }}}
 " }}}
 
 " {{{ NeoBundle
@@ -177,6 +192,7 @@ NeoBundle 'thinca/vim-visualstar'
 
 " Code assist
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'mattn/emmet-vim'
