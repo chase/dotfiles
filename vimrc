@@ -195,6 +195,7 @@ NeoBundle 'kshenoy/vim-origami'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
+NeoBundle 'OmniSharp/omnisharp-vim'
 
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'

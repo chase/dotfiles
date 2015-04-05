@@ -9,4 +9,9 @@ ln -si $abspath/vim ~/.vim
 ln -si $abspath/zsh-custom ~/.zsh-custom
 ln -si $abspath/zshrc ~/.zshrc
 
-vim +NeoBundleInstall +qall
+source zsh-custom/dnvm/kvm.sh
+
+vim +NeoBundleInstall +qall && \
+pushd ~/.vim/bundle/omnisharp-vim/omnisharp-roslyn && \
+./build.sh || ./build.sh && \
+popd
