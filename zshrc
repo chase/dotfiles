@@ -112,3 +112,6 @@ function ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+# Set zsh Terminal Title
+chpwd () {print -Pn "\e]0;zsh: %~\a"}
