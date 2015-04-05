@@ -53,7 +53,12 @@ ZSH_CUSTOM=~/.zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git bower dircycle golang docker npm systemd themes z)
 
+# OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
+
+# .NET Version Manager
+export KRE_USER_HOME=~/.k
+[[ -s $ZSH_CUSTOM/dnvm/kvm.sh ]] && source $ZSH_CUSTOM/dnvm/kvm.sh
 
 # User configuration
 

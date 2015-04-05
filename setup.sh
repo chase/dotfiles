@@ -1,5 +1,7 @@
 #!/bin/sh
+git submodule foreach git pull
 abspath=`pwd`
+mkdir ~/.k
 ln -si $abspath/vimrc ~/.vimrc
 [ -d ~/.vim ] && rm -rfI ~/.vim
 ln -si $abspath/vim ~/.vim
