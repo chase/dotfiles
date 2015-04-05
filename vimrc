@@ -160,7 +160,6 @@ NeoBundle 'roryokane/detectindent'
 " Tools
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
 
@@ -196,7 +195,6 @@ NeoBundle 'kshenoy/vim-origami'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
-NeoBundle 'ivanov/vim-ipython'
 
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'
@@ -292,31 +290,6 @@ function! s:check_back_space()
 endfunction
 " }}
 " }}}
-" }}}
-
-" {{{ iPython Setup
-function! UpIPython()
-python << EOF
-if not kc:
-    km_from_string()
-EOF
-    map  <buffer> <silent> <Leader>d <Plug>(IPython-OpenPyDoc)
-    map  <buffer> <silent> <C-Return> <Plug>(IPython-RunFile)
-    map  <buffer> <silent> <Leader>rf <Plug>(IPython-RunFile)
-    map  <buffer> <silent> <Leader>rl  <Plug>(IPython-RunLine)
-    imap <buffer> <silent> <C-s>  <C-o><Plug>(IPython-RunLine)
-    xmap <buffer> <silent> <C-s>  <Plug>(IPython-RunLines)
-endfunction
-
-augroup ipython
-    autocmd!
-    autocmd FileType python
-                \ call system('pgrep -c ipython2') |
-                \ if v:shell_error |
-                \   call system('ipython2 kernel &>/dev/null &!')
-                \ endif |
-                \ call UpIPython()
-augroup END
 " }}}
 
 " {{{ Better split action for Vimfiler
