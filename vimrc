@@ -298,10 +298,15 @@ function! s:my_cr()
 endfunction
 inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
 
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
 " For smart TAB completion {{
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ neocomplete#start_manual_complete()."\<C-n>"
+    \ neocomplete#start_manual_complete()
 function! s:check_back_space()
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
