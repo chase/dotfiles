@@ -286,6 +286,7 @@ map! <S-Insert> <MiddleMouse>
 
 " NerdCommenter!
 nmap <Leader>/ <plug>NERDCommenterToggle<CR>
+vmap <Leader>/ <plug>NERDCommenterToggle<CR>
 
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
