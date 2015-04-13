@@ -1,0 +1,3 @@
+[submodule "dnvm"]
+	path = zsh-custom/dnvm
+	url = git://github.com/aspnet/Home.git

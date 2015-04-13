@@ -18,7 +18,7 @@ CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=30
+#export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -51,9 +51,14 @@ ZSH_CUSTOM=~/.zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bower dircycle docker npm systemd themes z)
+plugins=(git bower dircycle golang docker npm systemd themes z)
 
+# OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
+
+# .NET Version Manager
+export KRE_USER_HOME=~/.k
+[[ -s $ZSH_CUSTOM/dnvm/kvm.sh ]] && source $ZSH_CUSTOM/dnvm/kvm.sh
 
 # User configuration
 
@@ -112,3 +117,6 @@ function ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+# Set zsh Terminal Title
+chpwd () {print -Pn "\e]0;zsh: %~\a"}

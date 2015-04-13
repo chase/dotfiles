@@ -37,6 +37,7 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_fuzzy_completion = 0
 
 " Shell style
+let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#disable_auto_complete = 1
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
@@ -60,15 +61,21 @@ if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
 
-let g:neocomplete#force_omni_input_patterns.cpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.go =
+    \ '[^.[:digit:] *\t]\.'
 
-let g:neocomplete#force_omni_input_patterns.python = ''
+let g:neocomplete#force_omni_input_patterns.cpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+let g:neocomplete#force_omni_input_patterns.python =
+    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType python setlocal omnifunc=jedi#completions
 " }}}
 " Ultisnips (Plays nicely with neocomplete) {{{
 let g:UltiSnipsExpandTrigger="<c-l>"
@@ -108,9 +115,9 @@ let g:tagbar_type_moon = {
 " {{{ Vimfiler
 let g:vimfiler_tree_leaf_icon = "┊"
 let g:vimfiler_tree_opened_icon = "▼"
-let g:vimfiler_tree_closed_icon = "►"
+let g:vimfiler_tree_closed_icon = "▶"
 let g:vimfiler_readonly_file_icon = ""
-let g:vimfiler_marked_file_icon = "◉"
+let g:vimfiler_marked_file_icon = "▪"
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
 " }}}
@@ -126,6 +133,19 @@ let g:indent_guides_guide_size = 1
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': [],
   \ 'passive_filetypes': ['cpp','c','h'] }
+let g:syntastic_go_checkers=['gofmt']
+" }}}
+" {{{ Jedi (Python code complete)
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "gd"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = ""
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
+
+" Use Neocomplete for completion menu, not Jedi
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
 " }}}
 " }}}
 
@@ -149,13 +169,12 @@ NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'ap/vim-css-color'
 NeoBundle 'majutsushi/tagbar'
-NeoBundle 'rgarver/Kwbd.vim' " :Bclose (close buffer, keep window)
+NeoBundle 'rgarver/Kwbd.vim' " :Kwbd (close buffer, keep window)
 NeoBundle 'roryokane/detectindent'
 
 " Tools
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
 
@@ -173,6 +192,7 @@ NeoBundle 'thinca/vim-visualstar'
 
 " Code assist
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'mattn/emmet-vim'
@@ -191,7 +211,7 @@ NeoBundle 'kshenoy/vim-origami'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
-NeoBundle 'ivanov/vim-ipython'
+NeoBundle 'OmniSharp/omnisharp-vim'
 
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'
@@ -264,6 +284,10 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 " Shift-insert for mouse-less middle-click
 map! <S-Insert> <MiddleMouse>
 
+" NerdCommenter!
+nmap <Leader>/ <plug>NERDCommenterToggle<CR>
+vmap <Leader>/ <plug>NERDCommenterToggle<CR>
+
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
 inoremap <expr><C-l> neocomplete#complete_common_string()
@@ -273,6 +297,11 @@ function! s:my_cr()
     return neocomplete#close_popup() . "\<CR>"
 endfunction
 inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
+
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " For smart TAB completion {{
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
@@ -284,31 +313,6 @@ function! s:check_back_space()
 endfunction
 " }}
 " }}}
-" }}}
-
-" {{{ iPython Setup
-function! UpIPython()
-python << EOF
-if not kc:
-    km_from_string()
-EOF
-    map  <buffer> <silent> <Leader>d <Plug>(IPython-OpenPyDoc)
-    map  <buffer> <silent> <C-Return> <Plug>(IPython-RunFile)
-    map  <buffer> <silent> <Leader>rf <Plug>(IPython-RunFile)
-    map  <buffer> <silent> <Leader>rl  <Plug>(IPython-RunLine)
-    imap <buffer> <silent> <C-s>  <C-o><Plug>(IPython-RunLine)
-    xmap <buffer> <silent> <C-s>  <Plug>(IPython-RunLines)
-endfunction
-
-augroup ipython
-    autocmd!
-    autocmd FileType python
-                \ call system('pgrep -c ipython2') |
-                \ if v:shell_error |
-                \   call dispatch#start_command(1, 'ipython2 kernel') |
-                \ endif |
-                \ call UpIPython()
-augroup END
 " }}}
 
 " {{{ Better split action for Vimfiler
