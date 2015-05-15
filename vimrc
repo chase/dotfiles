@@ -210,6 +210,7 @@ NeoBundle 'chase/vim-foldfocus'
 NeoBundle 'kshenoy/vim-origami'
 
 " {{{ Languages
+NeoBundle "rust-lang/rust.vim"
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
@@ -352,6 +353,8 @@ endfunction
 
 " Handle terminal resize
 autocmd VimResized * :wincmd =
+
+autocmd BufNewFile,BufRead *.rs setf rust
 
 augroup DetectIndent
     autocmd!
