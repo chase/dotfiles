@@ -2,6 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 alias git='noglob hub'
+alias hg='noglob hg'
 alias bower='noglob bower'
 
 # Set name of the theme to load.
@@ -51,7 +52,7 @@ ZSH_CUSTOM=~/.zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bower dircycle golang docker npm systemd themes z)
+plugins=(git mercurial bower dircycle golang docker npm systemd themes z)
 
 # OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
