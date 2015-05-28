@@ -134,6 +134,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': [],
   \ 'passive_filetypes': ['cpp','c','h'] }
 let g:syntastic_go_checkers=['gofmt']
+let g:syntastic_javascript_checkers=['eslint']
 " }}}
 " {{{ Jedi (Python code complete)
 let g:jedi#goto_assignments_command = "<leader>g"
