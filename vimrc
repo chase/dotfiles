@@ -120,6 +120,7 @@ let g:vimfiler_readonly_file_icon = ""
 let g:vimfiler_marked_file_icon = "▪"
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_safemode_by_default = 0
 " }}}
 " {{{ Airline
 let g:airline_powerline_fonts = 1
