@@ -18,6 +18,7 @@ set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
 
 " {{{ Plugin Settings
+let g:vim_json_syntax_conceal = 0
 " Go! {{{
 let g:go_auto_type_info = 0
 let g:go_highlight_functions = 1
