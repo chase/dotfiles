@@ -18,6 +18,7 @@ set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
 
 " {{{ Plugin Settings
+let g:jsx_ext_required = 0
 " Go! {{{
 let g:go_auto_type_info = 0
 let g:go_highlight_functions = 1
@@ -218,6 +219,7 @@ NeoBundle 'OmniSharp/omnisharp-vim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'mxw/vim-jsx'
 NeoBundle 'elzr/vim-json'
 
 NeoBundle 'chase/Vim-Jinja2-Syntax'
@@ -350,10 +352,12 @@ function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
-" Handle terminal resize
-autocmd VimResized * :wincmd =
-
 augroup DetectIndent
     autocmd!
     autocmd BufReadPost * DetectIndent
 augroup END
+
+" Override xmlTag (JSX, really) as tag
+hi def link xmlTag Tag
+hi def link xmlTagName Macro
+hi def link xmlEndTag Tag
