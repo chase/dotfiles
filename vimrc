@@ -16,6 +16,7 @@ let mapleader = ","
 set number
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
+set diffopt+=vertical
 
 " {{{ Plugin Settings
 let g:jsx_ext_required = 0
