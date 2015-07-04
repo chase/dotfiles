@@ -20,6 +20,9 @@ set diffopt+=vertical
 " {{{ Plugin Settings
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
+let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
+let g:gitgutter_signs = 0
 
 " Go! {{{
 let g:go_auto_type_info = 0
@@ -265,7 +268,7 @@ omap w   <Plug>(easymotion-wl)
 omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
-nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split<CR>
+nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -explorer<CR>
 nmap <silent> <Leader>s :shell<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
