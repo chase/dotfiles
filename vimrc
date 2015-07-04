@@ -20,6 +20,8 @@ set diffopt+=vertical
 
 " {{{ Plugin Settings
 let g:jsx_ext_required = 0
+let g:vim_json_syntax_conceal = 0
+
 " Go! {{{
 let g:go_auto_type_info = 0
 let g:go_highlight_functions = 1
@@ -115,7 +117,7 @@ let g:vimfiler_readonly_file_icon = ""
 let g:vimfiler_marked_file_icon = "▪"
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_safemode_by_default = 0
+let g:vimfiler_safe_mode_by_default = 0
 " }}}
 " {{{ Airline
 let g:airline_powerline_fonts = 1
@@ -253,7 +255,7 @@ omap w   <Plug>(easymotion-wl)
 omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
-nnoremap <silent> <Leader>n :VimFilerExplorer<CR>
+nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split<CR>
 nmap <silent> <Leader>s :shell<CR>
 
 nmap <CR> :call FoldFocus('vnew')<CR>
