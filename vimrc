@@ -13,7 +13,6 @@ if has('vim_starting')
 endif
 
 let mapleader = ","
-set number
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
 set diffopt+=vertical
@@ -119,10 +118,6 @@ let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
 let g:vimfiler_safe_mode_by_default = 0
 " }}}
-" {{{ Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='focuspoint'
-" }}}
 " {{{ Indent Guides
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
@@ -161,6 +156,7 @@ NeoBundle 'roryokane/detectindent'
 
 " Tools
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
@@ -189,7 +185,6 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'rking/ag.vim'
 
 " Folding
-NeoBundle 'chase/vim-foldfocus'
 NeoBundle 'kshenoy/vim-origami'
 
 " {{{ Languages
@@ -236,6 +231,21 @@ NeoBundleCheck
 " Colorscheme
 color focuspoint
 
+" {{{ Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='focuspoint'
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'warning' ]
+    \ ]
+let g:airline#extensions#default#section_truncate_width = {}
+let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
+let g:airline_section_y = g:airline#section#create(['filetype'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 2
+" }}}
+
 " {{{ Key mapping
 vmap <CR>   <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
@@ -258,7 +268,6 @@ omap B   <Plug>(easymotion-Bl)
 nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split<CR>
 nmap <silent> <Leader>s :shell<CR>
 
-nmap <CR> :call FoldFocus('vnew')<CR>
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
 nmap <silent> <Leader>cd :lcd %:h<CR>
@@ -285,7 +294,6 @@ endfunction
 inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
 
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
