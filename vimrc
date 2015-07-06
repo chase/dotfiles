@@ -13,6 +13,8 @@ if has('vim_starting')
 endif
 
 let mapleader = ","
+set nowrap
+set nosmarttab
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
 set diffopt+=vertical
@@ -241,7 +243,6 @@ let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'warning' ]
     \ ]
-let g:airline#extensions#default#section_truncate_width = {}
 let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
 let g:airline_section_y = g:airline#section#create(['filetype'])
 let g:airline#extensions#tabline#enabled = 1
@@ -268,7 +269,7 @@ omap w   <Plug>(easymotion-wl)
 omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
-nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -explorer<CR>
+nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
 nmap <silent> <Leader>s :shell<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
@@ -285,6 +286,10 @@ map! <S-Insert> <MiddleMouse>
 " NerdCommenter!
 nmap <Leader>/ <plug>NERDCommenterToggle<CR>
 vmap <Leader>/ <plug>NERDCommenterToggle<CR>
+
+" Unite
+nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
+nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
 
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
@@ -312,18 +317,6 @@ endfunction
 " }}}
 " }}}
 
-" {{{ Better split action for Vimfiler
-let s:opentopleft = { 'is_selectable' : 1 }
-function! s:opentopleft.func(candidates)
-  for candidate in a:candidates
-    call unite#util#command_with_restore_cursor('topleft split')
-    call unite#take_action('open', candidate)
-  endfor
-endfunction
-call unite#custom#action('openable', 'topleft', s:opentopleft)
-autocmd FileType vimfiler nnoremap <silent><buffer><expr> S vimfiler#do_action('topleft')
-"}}}
-
 " Remove cruft
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -344,6 +337,9 @@ au FileType qf call AdjustWindowHeight(3, 5)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+
+" Handle terminal resize
+autocmd VimResized * :wincmd =
 
 augroup DetectIndent
     autocmd!
