@@ -13,13 +13,20 @@ if has('vim_starting')
 endif
 
 let mapleader = ","
-set number
+set nowrap
+set nosmarttab
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab textwidth=0
+set diffopt+=vertical
 
 " {{{ Plugin Settings
 let g:vim_json_syntax_conceal = 0
 let g:jsx_ext_required = 0
+let g:vim_json_syntax_conceal = 0
+let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
+let g:gitgutter_signs = 0
+
 " Go! {{{
 let g:go_auto_type_info = 0
 let g:go_highlight_functions = 1
@@ -77,19 +84,12 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType python setlocal omnifunc=jedi#completions
-" }}}
-" Ultisnips (Plays nicely with neocomplete) {{{
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " }}}
 " {{{ iPython
 let g:ipy_perform_mappings = 0
 let g:ipy_completefunc = 'local'
 " }}}
 " {{{ Tagbar
-let g:tagbar_type_javascript = { 'ctagsbin' : '/usr/bin/jsctags' }
 let g:tagbar_type_coffee = {
     \ 'ctagstype' : 'coffee',
     \ 'kinds'     : [
@@ -122,11 +122,7 @@ let g:vimfiler_readonly_file_icon = ""
 let g:vimfiler_marked_file_icon = "▪"
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_safemode_by_default = 0
-" }}}
-" {{{ Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='focuspoint'
+let g:vimfiler_safe_mode_by_default = 0
 " }}}
 " {{{ Indent Guides
 let g:indent_guides_start_level = 2
@@ -138,18 +134,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'passive_filetypes': ['cpp','c','h'] }
 let g:syntastic_go_checkers=['gofmt']
 let g:syntastic_javascript_checkers=['eslint']
-" }}}
-" {{{ Jedi (Python code complete)
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "gd"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = ""
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = "<leader>r"
-
-" Use Neocomplete for completion menu, not Jedi
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
 " }}}
 " }}}
 
@@ -178,6 +162,7 @@ NeoBundle 'roryokane/detectindent'
 
 " Tools
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
@@ -196,9 +181,7 @@ NeoBundle 'thinca/vim-visualstar'
 
 " Code assist
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'osyo-manga/vim-marching'
-NeoBundle 'SirVer/ultisnips'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -208,7 +191,6 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'rking/ag.vim'
 
 " Folding
-NeoBundle 'chase/vim-foldfocus'
 NeoBundle 'kshenoy/vim-origami'
 
 " {{{ Languages
@@ -255,6 +237,20 @@ NeoBundleCheck
 " Colorscheme
 color focuspoint
 
+" {{{ Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='focuspoint'
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'warning' ]
+    \ ]
+let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
+let g:airline_section_y = g:airline#section#create(['filetype'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 2
+" }}}
+
 " {{{ Key mapping
 vmap <CR>   <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
@@ -274,10 +270,9 @@ omap w   <Plug>(easymotion-wl)
 omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
-nnoremap <silent> <Leader>n :VimFilerExplorer<CR>
+nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
 nmap <silent> <Leader>s :shell<CR>
 
-nmap <CR> :call FoldFocus('vnew')<CR>
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
 nmap <silent> <Leader>cd :lcd %:h<CR>
@@ -293,6 +288,10 @@ map! <S-Insert> <MiddleMouse>
 nmap <Leader>/ <plug>NERDCommenterToggle<CR>
 vmap <Leader>/ <plug>NERDCommenterToggle<CR>
 
+" Unite
+nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
+nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
+
 " {{{ Neocomplete key mapping
 inoremap <expr><C-g> neocomplete#undo_completion()
 inoremap <expr><C-l> neocomplete#complete_common_string()
@@ -304,7 +303,6 @@ endfunction
 inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
 
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
@@ -319,18 +317,6 @@ endfunction
 " }}
 " }}}
 " }}}
-
-" {{{ Better split action for Vimfiler
-let s:opentopleft = { 'is_selectable' : 1 }
-function! s:opentopleft.func(candidates)
-  for candidate in a:candidates
-    call unite#util#command_with_restore_cursor('topleft split')
-    call unite#take_action('open', candidate)
-  endfor
-endfunction
-call unite#custom#action('openable', 'topleft', s:opentopleft)
-autocmd FileType vimfiler nnoremap <silent><buffer><expr> S vimfiler#do_action('topleft')
-"}}}
 
 " Remove cruft
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -352,6 +338,9 @@ au FileType qf call AdjustWindowHeight(3, 5)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+
+" Handle terminal resize
+autocmd VimResized * :wincmd =
 
 augroup DetectIndent
     autocmd!
