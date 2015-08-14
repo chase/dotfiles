@@ -57,10 +57,6 @@ plugins=(git mercurial bower dircycle golang docker npm systemd themes z)
 # OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
 
-# .NET Version Manager
-export KRE_USER_HOME=~/.k
-[[ -s $ZSH_CUSTOM/dnvm/kvm.sh ]] && source $ZSH_CUSTOM/dnvm/kvm.sh
-
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl"
@@ -73,6 +69,9 @@ export LUA_CPATH="/usr/local/lib/lua/5.2/?.so;/home/chase/.luarocks/lib/lua/5.2/
 export VAGRANT_DEFAULT_PROVIDER=docker
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
+
+# Node Version Manger
+[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
