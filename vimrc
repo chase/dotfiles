@@ -252,6 +252,10 @@ let g:airline#extensions#tabline#tab_min_count = 2
 " }}}
 
 " {{{ Key mapping
+
+" Disable help key
+map <S-k> <nop>
+
 vmap <CR>   <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
