@@ -133,6 +133,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'passive_filetypes': ['cpp','c','h'] }
 let g:syntastic_go_checkers=['gofmt']
 let g:syntastic_javascript_checkers=['eslint']
+" Use local ESLint by default
+let g:syntastic_javascript_eslint_exec='`npm bin`/eslint'
 " }}}
 " }}}
 
