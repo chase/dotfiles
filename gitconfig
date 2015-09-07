@@ -1,0 +1,9 @@
+[user]
+	email = chase@colman.io
+	name = Chase Colman
+[push]
+	default = simple
+[merge]
+	tool = vim
+[mergetool "vim"]
+	cmd = vim \"+Gdiff\" $MERGED
