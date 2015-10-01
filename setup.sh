@@ -1,8 +1,19 @@
 #!/usr/bin/zsh
 abspath=`pwd`
+if type nvim; then
+    echo -n "Setup nvim files? (.nvim and .nvimrc will be removed) [N/y] " && read yesno
+    if [[ "$yesno:l" == "y" ]] {
+        [ -e ~/.nvimrc ] && rm ~/.nvimrc
+        ln -s $abspath/nvimrc ~/.nvimrc
+        [ -e ~/.nvim ] && rm -rf ~/.nvim
+        mkdir -p ~/.nvim/bundle
+        git clone https://github.com/Shougo/neobundle.vim ~/.nvim/bundle/neobundle.vim
+        nvim +NeoBundleInstall +qall
+        nvim +UpdateRemotePlugins +qall
+    }
+fi
 echo -n "Setup vim files? (.vim and .vimrc will be removed) [N/y] " && read yesno
 if [[ "$yesno:l" == "y" ]] {
-    mkdir ~/.k
     [ -e ~/.vimrc ] && rm ~/.vimrc
     ln -s $abspath/vimrc ~/.vimrc
     [ -e ~/.vim ] && rm -rf ~/.vim

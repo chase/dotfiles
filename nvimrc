@@ -7,9 +7,9 @@ if has('vim_starting')
         set nocompatible
     endif
 
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    set runtimepath+=~/.vim/hilinks/
-    set runtimepath+=~/.vim/print-bw/
+    set runtimepath+=~/.nvim/bundle/neobundle.vim/
+    set runtimepath+=~/.nvim/hilinks/
+    set runtimepath+=~/.nvim/print-bw/
 endif
 
 let mapleader = ","
@@ -19,7 +19,7 @@ set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab textwidth=0
 set diffopt+=vertical
 set foldmethod=indent foldnestmax=2 foldlevelstart=1
-set ttymouse=urxvt mouse=a
+set mouse=a
 
 " {{{ Plugin Settings
 let g:vim_json_syntax_conceal = 0
@@ -36,49 +36,49 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 " }}}
-" {{{ Neocomplete
+" {{{ Deoplete
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+let g:deoplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#enable_fuzzy_completion = 0
+let g:deoplete#sources#syntax#min_keyword_length = 3
+let g:deoplete#enable_fuzzy_completion = 0
 
 " Shell style
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#disable_auto_complete = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:deoplete#enable_auto_select = 0
+let g:deoplete#disable_auto_complete = 1
+let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
+let g:deoplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist'
 \ }
 
 " Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if !exists('g:deoplete#keyword_patterns')
+    let g:deoplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+let g:deoplete#keyword_patterns['default'] = '\h\w*'
 
 " Clang support
 let g:marching_clang_command = "/usr/bin/clang"
-let g:marching_enable_neocomplete = 1
+let g:marching_enable_deoplete = 1
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
+if !exists('g:deoplete#force_omni_input_patterns')
+    let g:deoplete#force_omni_input_patterns = {}
 endif
 
-let g:neocomplete#force_omni_input_patterns.go =
+let g:deoplete#force_omni_input_patterns.go =
     \ '[^.[:digit:] *\t]\.'
 
-let g:neocomplete#force_omni_input_patterns.cpp =
+let g:deoplete#force_omni_input_patterns.cpp =
     \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
-let g:neocomplete#force_omni_input_patterns.python =
+let g:deoplete#force_omni_input_patterns.python =
     \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " Enable omni completion.
@@ -130,19 +130,16 @@ let g:vimfiler_safe_mode_by_default = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 " }}}
-" {{{ Syntastic
-let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['cpp','c','h'] }
-let g:syntastic_go_checkers=['gofmt']
-let g:syntastic_javascript_checkers=['eslint']
+" {{{ Neomake
+let g:neomake_go_enabled_makers=['gofmt']
+let g:neomake_javascript_enabled_makers=['eslint']
 " Use local ESLint by default
-let g:syntastic_javascript_eslint_exec='`npm bin`/eslint'
+let g:neomake_javascript_eslint_exe='eslint-local'
 " }}}
 " }}}
 
 " {{{ NeoBundle
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.nvim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Defaults
@@ -172,7 +169,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
 
 " Error checks
-NeoBundle 'scrooloose/syntastic'
+NeoBundle 'benekastah/neomake'
 
 " Motion
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -184,7 +181,7 @@ NeoBundle 'michaeljsmith/vim-indent-object'
 NeoBundle 'thinca/vim-visualstar'
 
 " Code assist
-NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/deoplete.nvim'
 NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'junegunn/vim-easy-align'
@@ -194,14 +191,10 @@ NeoBundle 'tpope/vim-endwise'
 " Search
 NeoBundle 'rking/ag.vim'
 
-" Folding
-NeoBundle 'kshenoy/vim-origami'
-
 " {{{ Languages
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'leafo/moonscript-vim'
-NeoBundle 'OmniSharp/omnisharp-vim'
 
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mmalecki/vim-node.js'
@@ -209,7 +202,6 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'elzr/vim-json'
 
-NeoBundle 'chase/Vim-Jinja2-Syntax'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'tpope/vim-haml'
 
@@ -217,7 +209,6 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'cakebaker/scss-syntax.vim'
 
 NeoBundle 'ajf/puppet-vim'
-NeoBundle 'chase/vim-ansible-yaml'
 
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-cucumber'
@@ -279,7 +270,7 @@ omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
 nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
-nmap <silent> <Leader>s :shell<CR>
+nmap <silent> <Leader>s :vsplit term<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
@@ -300,28 +291,12 @@ vmap <Leader>/ <plug>NERDCommenterToggle<CR>
 nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
 nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
 
-" {{{ Neocomplete key mapping
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() . "\<Space>" : "\<Space>"
-" <CR>: Close popup, complete, return and save indent
-function! s:my_cr()
-    return neocomplete#close_popup() . "\<CR>"
-endfunction
-inoremap <silent><CR> <C-r>=<SID>my_cr()<CR>
-
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" {{{ Deoplete key mapping
+inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  deoplete#mappings#smart_close_popup()
 
 " For smart TAB completion {{
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ neocomplete#start_manual_complete()
-function! s:check_back_space()
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+inoremap <expr><TAB> deoplete#mappings#manual_complete()
 " }}
 " }}}
 " }}}
@@ -354,6 +329,9 @@ augroup DetectIndent
     autocmd!
     autocmd BufReadPost * DetectIndent
 augroup END
+
+" Syntax check on write
+autocmd BufWritePost * Neomake
 
 " Override xmlTag (JSX, really) as tag
 hi def link xmlTag Tag
