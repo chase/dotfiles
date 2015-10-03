@@ -78,7 +78,7 @@ export PATH="$PATH:$GOPATH/bin"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR=nvim
 export BROWSER=chromium
 
 # Compilation flags
@@ -97,6 +97,8 @@ alias gcs='gsc'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -selection clipboard -o'
 alias tarball='tar -czf'
+
+alias vim='nvim'
 
 function ex ()
 {
