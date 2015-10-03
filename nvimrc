@@ -9,13 +9,11 @@ if has('vim_starting')
 
     set runtimepath+=~/.nvim/bundle/neobundle.vim/
     set runtimepath+=~/.nvim/hilinks/
-    set runtimepath+=~/.nvim/print-bw/
 endif
 
 let mapleader = ","
 set nowrap
 set nosmarttab
-set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab textwidth=0
 set diffopt+=vertical
 set foldmethod=indent foldnestmax=2 foldlevelstart=1
@@ -135,6 +133,8 @@ let g:neomake_go_enabled_makers=['gofmt']
 let g:neomake_javascript_enabled_makers=['eslint']
 " Use local ESLint by default
 let g:neomake_javascript_eslint_exe='eslint-local'
+let g:neomake_error_sign = { 'text': 'E>', 'texthl': 'SpellBad' }
+let g:neomake_warning_sign = { 'text': 'W>',  'texthl': 'SpellCap' }
 " }}}
 " }}}
 
@@ -306,7 +306,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " {{{ Print mode
 command! -nargs=* Hardcopy call DoMyPrint('<args>')
-function DoMyPrint(args)
+function! DoMyPrint(args)
   let colorsave=g:colors_name
   color print_bw
   setl printfont=courier\ 9
