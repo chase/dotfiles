@@ -7,6 +7,7 @@ if type nvim; then
         ln -s $abspath/nvimrc ~/.nvimrc
         [ -e ~/.nvim ] && rm -rf ~/.nvim
         mkdir -p ~/.nvim/bundle
+		for file in $absepath/nvim; { ln -s $file ~/.nvim; }
         git clone https://github.com/Shougo/neobundle.vim ~/.nvim/bundle/neobundle.vim
         nvim +NeoBundleInstall +qall
         nvim +UpdateRemotePlugins +qall

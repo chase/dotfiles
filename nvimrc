@@ -11,223 +11,79 @@ if has('vim_starting')
     set runtimepath+=~/.nvim/hilinks/
 endif
 
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
 let mapleader = ","
 set nowrap
-set nosmarttab
+
 set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab textwidth=0
+set autoindent
+set nosmarttab
+set smartindent
+
+set backspace=indent,eol,start
+set complete-=i
+
+set nrformats-=octal
+set ttimeout
+set ttimeoutlen=100
+
 set diffopt+=vertical
-set foldmethod=indent foldnestmax=2 foldlevelstart=1
-set mouse=a
+set foldmethod=indent foldnestmax=2 foldlevelstart=1 nofoldenable
 
-" {{{ Plugin Settings
-let g:vim_json_syntax_conceal = 0
-let g:jsx_ext_required = 0
-let g:vim_json_syntax_conceal = 0
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
-let g:gitgutter_signs = 0
+set mouse=nvc
 
-" Go! {{{
-let g:go_auto_type_info = 0
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-" }}}
-" {{{ Deoplete
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" Use smartcase.
-let g:deoplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:deoplete#sources#syntax#min_keyword_length = 3
-let g:deoplete#enable_fuzzy_completion = 0
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
 
-" Shell style
-let g:deoplete#enable_auto_select = 0
-let g:deoplete#disable_auto_complete = 1
-let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
+set laststatus=2
+set showcmd
 
-" Define dictionary.
-let g:deoplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist'
-\ }
+set scrolloff=5
+set sidescrolloff=5
+set display+=lastline
 
-" Define keyword.
-if !exists('g:deoplete#keyword_patterns')
-    let g:deoplete#keyword_patterns = {}
-endif
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-
-" Clang support
-let g:marching_clang_command = "/usr/bin/clang"
-let g:marching_enable_deoplete = 1
-
-if !exists('g:deoplete#force_omni_input_patterns')
-    let g:deoplete#force_omni_input_patterns = {}
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
-let g:deoplete#force_omni_input_patterns.go =
-    \ '[^.[:digit:] *\t]\.'
+set autoread
+set fileformats+=mac
 
-let g:deoplete#force_omni_input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+if &history < 1000
+  set history=1000
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
 
-let g:deoplete#force_omni_input_patterns.python =
-    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" }}}
-" {{{ iPython
-let g:ipy_perform_mappings = 0
-let g:ipy_completefunc = 'local'
-" }}}
-" {{{ Tagbar
-let g:tagbar_type_coffee = {
-    \ 'ctagstype' : 'coffee',
-    \ 'kinds'     : [
-        \ 't:gulp tasks',
-        \ 'v:variables',
-        \ 'f:functions',
-        \ 'c:classes',
-        \ 'm:methods',
-        \ 's:static properties',
-        \ 'p:properties',
-    \ ]
-\ }
-let g:tagbar_type_moon = {
-    \ 'ctagstype' : 'moonscript',
-    \ 'kinds'     : [
-        \ 'v:variables',
-        \ 'f:functions',
-        \ 'c:classes',
-        \ 'm:methods',
-        \ 's:static properties',
-        \ 'p:properties',
-    \ ]
-\ }
-" }}}
-" {{{ Vimfiler
-let g:vimfiler_tree_leaf_icon = "┊"
-let g:vimfiler_tree_opened_icon = "▼"
-let g:vimfiler_tree_closed_icon = "▶"
-let g:vimfiler_readonly_file_icon = ""
-let g:vimfiler_marked_file_icon = "▪"
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_safe_mode_by_default = 0
-" }}}
-" {{{ Indent Guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-" }}}
-" {{{ Neomake
-let g:neomake_go_enabled_makers=['gofmt']
-let g:neomake_javascript_enabled_makers=['eslint']
-" Use local ESLint by default
-let g:neomake_javascript_eslint_exe='eslint-local'
-let g:neomake_error_sign = { 'text': 'E>', 'texthl': 'SpellBad' }
-let g:neomake_warning_sign = { 'text': 'W>',  'texthl': 'SpellCap' }
-" }}}
-" }}}
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
-" {{{ NeoBundle
-call neobundle#begin(expand('~/.nvim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+inoremap <C-U> <C-G>u<C-U>
 
-" Defaults
-NeoBundle 'tpope/vim-sensible'
+if filereadable(expand("~/.nvim/plugins.vim"))
+  source ~/.nvim/plugins.vim
+endif
 
-" Libraries
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim', {'build':{'linux': 'make'}}
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'mattn/webapi-vim'
-
-" Display
-NeoBundle 'bling/vim-airline'
-NeoBundle 'junegunn/goyo.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'ap/vim-css-color'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'rgarver/Kwbd.vim' " :Kwbd (close buffer, keep window)
-NeoBundle 'roryokane/detectindent'
-
-" Tools
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
-
-" Error checks
-NeoBundle 'benekastah/neomake'
-
-" Motion
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'edsono/vim-matchit'
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'thinca/vim-visualstar'
-
-" Code assist
-NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'osyo-manga/vim-marching'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tpope/vim-endwise'
-
-" Search
-NeoBundle 'rking/ag.vim'
-
-" {{{ Languages
-NeoBundle 'tpope/vim-git'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'leafo/moonscript-vim'
-
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mmalecki/vim-node.js'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'elzr/vim-json'
-
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'tpope/vim-haml'
-
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'cakebaker/scss-syntax.vim'
-
-NeoBundle 'ajf/puppet-vim'
-
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'sunaku/vim-ruby-minitest'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'skwp/vim-rspec'
-
-NeoBundle 'depuracao/vim-rdoc'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'timcharper/textile.vim'
-" }}}
-
-" Colorscheme
-NeoBundle 'chase/focuspoint-vim'
-NeoBundle 'chase/vim-airline-focuspoint'
-
-call neobundle#end()
-NeoBundleCheck
-" }}}
+if filereadable(expand("~/.nvim/bundles.vim"))
+  source ~/.nvim/bundles.vim
+endif
 
 " Colorscheme
 color focuspoint
@@ -312,7 +168,7 @@ inoremap <expr><TAB> deoplete#mappings#manual_complete()
 " }}}
 
 " Remove cruft
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setl formatoptions-=cro | setl formatoptions+=mMBlj
 
 " {{{ Print mode
 command! -nargs=* Hardcopy call DoMyPrint('<args>')

@@ -79,7 +79,7 @@ export PATH="$PATH:$GOPATH/bin"
 export LANG=en_US.UTF-8
 
 export EDITOR=nvim
-export BROWSER=chromium
+export BROWSER=google-chrome
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
