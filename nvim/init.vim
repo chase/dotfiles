@@ -7,8 +7,7 @@ if has('vim_starting')
         set nocompatible
     endif
 
-    set runtimepath+=~/.nvim/bundle/neobundle.vim/
-    set runtimepath+=~/.nvim/hilinks/
+    set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
 endif
 
 if has('autocmd')
@@ -77,12 +76,12 @@ endif
 
 inoremap <C-U> <C-G>u<C-U>
 
-if filereadable(expand("~/.nvim/plugins.vim"))
-  source ~/.nvim/plugins.vim
+if filereadable(expand("~/.config/nvim/plugins.vim"))
+  source ~/.config/nvim/plugins.vim
 endif
 
-if filereadable(expand("~/.nvim/bundles.vim"))
-  source ~/.nvim/bundles.vim
+if filereadable(expand("~/.config/nvim/bundles.vim"))
+  source ~/.config/nvim/bundles.vim
 endif
 
 " Colorscheme

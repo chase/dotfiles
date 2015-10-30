@@ -1,14 +1,14 @@
 #!/usr/bin/zsh
 abspath=`pwd`
 if type nvim; then
-    echo -n "Setup nvim files? (.nvim and .nvimrc will be removed) [N/y] " && read yesno
+    echo -n "Setup nvim files? (.nvim, .nvimrc, and .config/nvim will be removed) [N/y] " && read yesno
     if [[ "$yesno:l" == "y" ]] {
+        [ -e ~/.config/nvim ] && rm ~/.config/nvim
         [ -e ~/.nvimrc ] && rm ~/.nvimrc
-        ln -s $abspath/nvimrc ~/.nvimrc
         [ -e ~/.nvim ] && rm -rf ~/.nvim
-        mkdir -p ~/.nvim/bundle
+        mkdir -p ~/.config/nvim/bundle
 		for file in $absepath/nvim; { ln -s $file ~/.nvim; }
-        git clone https://github.com/Shougo/neobundle.vim ~/.nvim/bundle/neobundle.vim
+        git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim
         nvim +NeoBundleInstall +qall
         nvim +UpdateRemotePlugins +qall
     }
