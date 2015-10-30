@@ -74,7 +74,7 @@ prompt_git() {
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➡ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="⚡ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
     if [[ -n $dirty ]]; then
       prompt_segment yellow black
     else
@@ -134,7 +134,7 @@ prompt_hg() {
       else
         prompt_segment green black
       fi
-      echo -n "☿ $rev@$branch" $st
+      echo -n "HG $rev@$branch" $st
     fi
   fi
 }
