@@ -61,9 +61,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl"
 LUA_PATH="/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib/lua/5.3/?.lua;/usr/lib/lua/5.3/?/init.lua;./?.lua"
-export LUA_PATH="/usr/local/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?/init.lua;/home/chase/.luarocks/share/lua/5.3/?.lua;/home/chase/.luarocks/share/lua/5.3/?/init.lua;$LUA_PATH"
-LUA_CPATH="/usr/local/lib/lua/5.3/?.so;/home/chase/.luarocks/lib/lua/5.3/?.so;/usr/lib/lua/5.3/?.so;/usr/lib/lua/5.3/loadall.so;./?.so"
-export LUA_CPATH="/usr/local/lib/lua/5.3/?.so;/home/chase/.luarocks/lib/lua/5.3/?.so;$LUA_CPATH"
+export LUA_PATH="/usr/local/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?/init.lua;$HOME/.luarocks/share/lua/5.3/?.lua;$HOME/.luarocks/share/lua/5.3/?/init.lua;$LUA_PATH"
+LUA_CPATH="/usr/local/lib/lua/5.3/?.so;$HOME/.luarocks/lib/lua/5.3/?.so;/usr/lib/lua/5.3/?.so;/usr/lib/lua/5.3/loadall.so;./?.so"
+export LUA_CPATH="/usr/local/lib/lua/5.3/?.so;$HOME/.luarocks/lib/lua/5.3/?.so;$LUA_CPATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 export DOCKER_HOST=unix:///var/run/docker.sock

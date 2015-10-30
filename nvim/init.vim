@@ -135,7 +135,7 @@ omap b   <Plug>(easymotion-bl)
 omap B   <Plug>(easymotion-Bl)
 
 nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
-nmap <silent> <Leader>s :vsplit term<CR>
+nmap <silent> <Leader>s :vsplit +term<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
