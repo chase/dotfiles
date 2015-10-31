@@ -1,9 +1,9 @@
-call neobundle#begin(expand('~/.nvim/bundle/'))
+call neobundle#begin(expand('~/.config/nvim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Libraries
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim', {'build':{'linux': 'make'}}
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'mattn/webapi-vim'
@@ -80,4 +80,3 @@ NeoBundle 'chase/focuspoint-vim'
 NeoBundle 'chase/vim-airline-focuspoint'
 
 call neobundle#end()
-NeoBundleCheck

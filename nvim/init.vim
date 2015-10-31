@@ -85,20 +85,30 @@ if filereadable(expand("~/.config/nvim/bundles.vim"))
 endif
 
 " Colorscheme
-color focuspoint
+if neobundle#tap('focuspoint-vim')
+  function! neobundle#hooks.on_post_source(bundle)
+	  color focuspoint
+  endfunction
+endif
 
 " {{{ Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='focuspoint'
-let g:airline#extensions#default#layout = [
-    \ [ 'a', 'b', 'c' ],
-    \ [ 'x', 'y', 'warning' ]
-    \ ]
-let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
-let g:airline_section_y = g:airline#section#create(['filetype'])
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#tabline#tab_min_count = 2
+if neobundle#tap('vim-airline')
+  let g:airline_powerline_fonts = 1
+  if neobundle#tap('vim-airline-focuspoint')
+    let g:airline_theme='focuspoint'
+  endif
+  let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'warning' ]
+      \ ]
+  function! neobundle#hooks.on_post_source(bundle)
+	  let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
+	  let g:airline_section_y = g:airline#section#create(['filetype'])
+  endfunction
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#buffer_min_count = 2
+  let g:airline#extensions#tabline#tab_min_count = 2
+endif
 " }}}
 
 " {{{ Key mapping
@@ -116,31 +126,40 @@ nnoremap <A-l> <C-w>l
 " Disable help key
 map <S-k> <nop>
 
-vmap <CR>   <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
+if neobundle#tap('vim-easy-align')
+  vmap <CR>   <Plug>(EasyAlign)
+  nmap <Leader>a <Plug>(EasyAlign)
+endif
 
-nmap <Leader>T   <Plug>(easymotion-Tl)
-nmap <Leader>t   <Plug>(easymotion-tl)
-nmap <Leader>s   <Plug>(easymotion-sl)
-nmap <Leader>F   <Plug>(easymotion-Fl)
-nmap <Leader>f   <Plug>(easymotion-fl)
-omap T   <Plug>(easymotion-Tl)
-omap t   <Plug>(easymotion-tl)
-omap s   <Plug>(easymotion-sl)
-omap F   <Plug>(easymotion-Fl)
-omap f   <Plug>(easymotion-fl)
-omap W   <Plug>(easymotion-Wl)
-omap w   <Plug>(easymotion-wl)
-omap b   <Plug>(easymotion-bl)
-omap B   <Plug>(easymotion-Bl)
+if neobundle#tap('vim-easymotion')
+  nmap <Leader>T   <Plug>(easymotion-Tl)
+  nmap <Leader>t   <Plug>(easymotion-tl)
+  nmap <Leader>s   <Plug>(easymotion-sl)
+  nmap <Leader>F   <Plug>(easymotion-Fl)
+  nmap <Leader>f   <Plug>(easymotion-fl)
+  omap T   <Plug>(easymotion-Tl)
+  omap t   <Plug>(easymotion-tl)
+  omap s   <Plug>(easymotion-sl)
+  omap F   <Plug>(easymotion-Fl)
+  omap f   <Plug>(easymotion-fl)
+  omap W   <Plug>(easymotion-Wl)
+  omap w   <Plug>(easymotion-wl)
+  omap b   <Plug>(easymotion-bl)
+  omap B   <Plug>(easymotion-Bl)
+endif
 
-nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
+if neobundle#tap('vimfiler.vim')
+  nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
+endif
 nmap <silent> <Leader>s :vsplit +term<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
 nmap <silent> <Leader>cd :lcd %:h<CR>
-nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
+
+if neobundle#tap('vim-dispatch')
+  nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
+endif
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
@@ -149,8 +168,10 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 map! <S-Insert> <MiddleMouse>
 
 " NerdCommenter!
-nmap <Leader>/ <plug>NERDCommenterToggle<CR>
-vmap <Leader>/ <plug>NERDCommenterToggle<CR>
+if neobundle#tap('nerdcommenter')
+  nmap <Leader>/ <plug>NERDCommenterToggle<CR>
+  vmap <Leader>/ <plug>NERDCommenterToggle<CR>
+endif
 
 " Unite
 nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
