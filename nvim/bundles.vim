@@ -1,5 +1,10 @@
+" vim: foldmethod=marker foldlevel=0
 call neobundle#begin(expand('~/.config/nvim/bundle/'))
+
 NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Colorscheme
+NeoBundle 'chase/focuspoint-vim'
 
 " Libraries
 NeoBundle 'Shougo/vimproc.vim', {'build':{'linux': 'make'}}
@@ -16,7 +21,7 @@ NeoBundle 'ap/vim-css-color'
 NeoBundle 'roryokane/detectindent'
 
 " Tools
-NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
+NeoBundle 'tpope/vim-fugitive', {'augroup': 'fugitive'}
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tpope/vim-dispatch'
@@ -73,10 +78,11 @@ NeoBundle 'skwp/vim-rspec'
 NeoBundle 'depuracao/vim-rdoc'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'timcharper/textile.vim'
+NeoBundle 'chase/vim-airline-focuspoint'
 " }}}
 
-" Colorscheme
-NeoBundle 'chase/focuspoint-vim'
-NeoBundle 'chase/vim-airline-focuspoint'
+if filereadable(expand("~/.config/nvim/plugins.vim"))
+  source ~/.config/nvim/plugins.vim
+endif
 
 call neobundle#end()

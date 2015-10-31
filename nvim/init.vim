@@ -1,4 +1,4 @@
-" vim: foldmethod=marker
+" vim: foldmethod=marker foldlevel=0
 " Note: Skip initialization for vim-tiny or vim-small
 if !1 | finish | endif
 
@@ -7,14 +7,11 @@ if has('vim_starting')
         set nocompatible
     endif
 
-    set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
+    set runtimepath+=~/.config/nvim/bundle/neobundle.vim
 endif
 
 if has('autocmd')
   filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
 endif
 
 let mapleader = ","
@@ -74,44 +71,19 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-inoremap <C-U> <C-G>u<C-U>
-
-if filereadable(expand("~/.config/nvim/plugins.vim"))
-  source ~/.config/nvim/plugins.vim
-endif
-
 if filereadable(expand("~/.config/nvim/bundles.vim"))
   source ~/.config/nvim/bundles.vim
 endif
 
-" Colorscheme
-if neobundle#tap('focuspoint-vim')
-  function! neobundle#hooks.on_post_source(bundle)
-	  color focuspoint
-  endfunction
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
 endif
 
-" {{{ Airline
-if neobundle#tap('vim-airline')
-  let g:airline_powerline_fonts = 1
-  if neobundle#tap('vim-airline-focuspoint')
-    let g:airline_theme='focuspoint'
-  endif
-  let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'warning' ]
-      \ ]
-  function! neobundle#hooks.on_post_source(bundle)
-	  let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
-	  let g:airline_section_y = g:airline#section#create(['filetype'])
-  endfunction
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_min_count = 2
-  let g:airline#extensions#tabline#tab_min_count = 2
-endif
-" }}}
+" Colorscheme
+color focuspoint
 
 " {{{ Key mapping
+inoremap <C-U> <C-G>u<C-U>
 
 " Embedded term window jumping
 tnoremap <A-h> <C-\><C-n><C-w>h
@@ -129,6 +101,8 @@ map <S-k> <nop>
 if neobundle#tap('vim-easy-align')
   vmap <CR>   <Plug>(EasyAlign)
   nmap <Leader>a <Plug>(EasyAlign)
+
+  call neobundle#untap()
 endif
 
 if neobundle#tap('vim-easymotion')
@@ -146,10 +120,14 @@ if neobundle#tap('vim-easymotion')
   omap w   <Plug>(easymotion-wl)
   omap b   <Plug>(easymotion-bl)
   omap B   <Plug>(easymotion-Bl)
+
+  call neobundle#untap()
 endif
 
 if neobundle#tap('vimfiler.vim')
   nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
+
+  call neobundle#untap()
 endif
 nmap <silent> <Leader>s :vsplit +term<CR>
 
@@ -171,6 +149,8 @@ map! <S-Insert> <MiddleMouse>
 if neobundle#tap('nerdcommenter')
   nmap <Leader>/ <plug>NERDCommenterToggle<CR>
   vmap <Leader>/ <plug>NERDCommenterToggle<CR>
+
+  call neobundle#untap()
 endif
 
 " Unite
@@ -180,10 +160,6 @@ nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
 " {{{ Deoplete key mapping
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  deoplete#mappings#smart_close_popup()
-
-" For smart TAB completion {{
-inoremap <expr><TAB> deoplete#mappings#manual_complete()
-" }}
 " }}}
 " }}}
 

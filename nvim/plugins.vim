@@ -1,3 +1,4 @@
+" vim: foldmethod=marker foldlevel=0
 " Plugin Settings
 "
 let g:vim_json_syntax_conceal = 0
@@ -89,4 +90,33 @@ let g:neomake_javascript_enabled_makers=['eslint']
 let g:neomake_javascript_eslint_exe='eslint-local'
 let g:neomake_error_sign = { 'text': 'E>', 'texthl': 'SpellBad' }
 let g:neomake_warning_sign = { 'text': 'W>',  'texthl': 'SpellCap' }
+" }}}
+
+" {{{ Airline
+if neobundle#tap('vim-airline')
+  let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'warning' ]
+    \ ]
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#buffer_min_count = 2
+  let g:airline#extensions#tabline#tab_min_count = 2
+
+  let g:airline_powerline_fonts = 1
+  function! neobundle#hooks.on_post_source(bundle)
+    let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
+    let g:airline_section_y = g:airline#section#create(['filetype'])
+  endfunction
+
+  call neobundle#untap()
+endif
+
+if neobundle#tap('vim-airline-focuspoint')
+  function! neobundle#hooks.on_post_source(bundle)
+    AirlineTheme focuspoint
+    AirlineRefresh
+  endfunction
+
+  call neobundle#untap()
+endif
 " }}}
