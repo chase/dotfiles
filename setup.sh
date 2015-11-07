@@ -34,3 +34,8 @@ if [[ "$yesno:l" == "y" ]] {
     [ -e ~/.gitconfig ] && rm ~/.gitconfig
     ln -s $abspath/gitconfig ~/.gitconfig
 }
+echo -n "Setup .Xdefaults? (.Xdefaults will be removed) [N/y] " && read yesno
+if [[ "$yesno:l" == "y" ]] {
+    [ -e ~/.Xdefaults ] && rm ~/.Xdefaults
+    ln -s $abspath/Xdefaults ~/.Xdefaults
+}

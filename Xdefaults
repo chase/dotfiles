@@ -1,0 +1,83 @@
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  google-chrome
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.xftAutoHint: true
+! Xft.dpi: 96
+! Xft.antialias: true
+! Xft.hinting: true
+! Xft.rgba: rgb
+! Xft.autohint: true
+! Xft.hintstyle: hintslight
+! Xft.lcdfilter: lcddefault
+
+URxvt*font: xft:Input:pixelsize=14:style=Regular
+URxvt*boldFont: xft:Input:pixelsize=14:style=Bold
+URxvt*italicFont: xft:Input:pixelsize=14:style=Italic
+URxvt*boldItalicFont: xft:Input:pixelsize=14:style=Bold Italic
+
+URxvt*intensityStyles: false
+
+! Set window title string, the default title is the command-line specified after the -e option, if any, otherwise the application name; option -title.
+URxvt*title: Terminal
+
+! Set scrollbar style to rxvt, plain, next or xterm. plain is the authors favourite.
+URxvt*scrollstyle: plain
+
+! Set the scrollbar width in pixels.
+URxvt.thickness: 3
+
+! True: place the scrollbar on the right of the window; option -sr.  False: place the scrollbar on the left of the window; option +sr.
+URxvt*scrollBar_right: true
+
+! True: scroll to bottom when tty receives output; option -si.  False: do not scroll to bottom when tty receives output; option +si.
+URxvt*scrollTtyOutput: false
+
+! True: scroll with scrollback buffer when tty receives new lines (i.e.  try to show the same lines) and scrollTtyOutput is False; option -sw. False: do not scroll with
+URxvt*scrollWithBuffer: true
+
+! True: scroll to bottom when a non-special key is pressed. Special keys are those which are intercepted by rxvt-unicode for special handling and are not passed onto the shell;
+URxvt*scrollTtyKeypress: true
+
+! Save number lines in the scrollback buffer [default 64]. This resource is limited on most machines to 65535; option -sl.
+URxvt*saveLines: 1024
+
+! Compile frills: Disable the usage of the built-in block graphics/line drawing characters and just rely on what the specified fonts provide. Use this if you have a good font
+URxvt*skipBuiltinGlyphs: true
+
+! .Xcolors
+! Base16 Railscasts
+*.foreground: #e6e1dc
+*.background: #2d2d2d
+*.cursorColor: #e6e1dc
+
+*.color0: #2d2d2d
+*.color1: #da4939
+*.color2: #a5c261
+*.color3: #ffc66d
+*.color4: #6d9cbe
+*.color5: #b6b3eb
+*.color6: #519f50
+*.color7: #e6e1dc
+
+*.color8: #5a647e
+*.color9: #da4939
+*.color10: #a5c261
+*.color11: #ffc66d
+*.color12: #6d9cbe
+*.color13: #b6b3eb
+*.color14: #519f50
+*.color15: #f9f7f3
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*.color16: #cc7833
+*.color17: #bc9458
+*.color18: #272935
+*.color19: #3a4055
+*.color20: #d4cfc9
+*.color21: #f4f1ed
