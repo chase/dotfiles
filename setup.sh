@@ -39,3 +39,11 @@ if [[ "$yesno:l" == "y" ]] {
     [ -e ~/.Xdefaults ] && rm ~/.Xdefaults
     ln -s $abspath/Xdefaults ~/.Xdefaults
 }
+if type xboomx; then
+    echo -n "Setup Xboomx? (.xboomx/config will be replaced) [N/y] " && read yesno
+    if [[ "$yesno:l" == "y" ]] {
+        mkdir -p ~/.xboomx
+        [ -e ~/.xboomx/config ] && rm ~/.xboomx/config
+        ln -s $abspath/xboomx-config ~/.xboomx/config
+    }
+fi
