@@ -3,10 +3,6 @@
 if !1 | finish | endif
 
 if has('vim_starting')
-    if &compatible
-        set nocompatible
-    endif
-
     set runtimepath+=~/.config/nvim/bundle/neobundle.vim
 endif
 
@@ -60,11 +56,6 @@ if !empty(&viminfo)
   set viminfo^=!
 endif
 set sessionoptions-=options
-
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
-  set t_Co=16
-endif
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
