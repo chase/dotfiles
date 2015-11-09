@@ -1,0 +1,3 @@
+{
+        "dmenu_params": "-i -y 530 -fn '-14' -i -nb '#2D2D2D' -nf white -sb '#7AAF77' -sf white -p \"#\""
+}
