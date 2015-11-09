@@ -22,6 +22,10 @@ if [[ "$yesno:l" == "y" ]] {
     git submodule foreach git pull
     vim +NeoBundleInstall +qall
 }
+echo -n "Install oh-my-zsh? [N/y] " && read yesno
+if [[ "$yesno:l" == "y" ]] {
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
 echo -n "Setup zsh files? (.zshrc and .zsh-custom will be removed) [N/y] " && read yesno
 if [[ "$yesno:l" == "y" ]] {
     [ -e ~/.zsh-custom ] && rm -rf ~/zsh-custom
