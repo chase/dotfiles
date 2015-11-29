@@ -84,7 +84,6 @@ let g:indent_guides_guide_size = 1
 " }}}
 
 " {{{ Neomake
-let g:neomake_go_enabled_makers=['gofmt']
 let g:neomake_javascript_enabled_makers=['eslint']
 " Use local ESLint by default
 let g:neomake_javascript_eslint_exe='eslint-local'

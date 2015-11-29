@@ -3,7 +3,7 @@
 if !1 | finish | endif
 
 if has('vim_starting')
-    set runtimepath+=~/.config/nvim/bundle/neobundle.vim
+  set runtimepath+=~/.config/nvim/bundle/neobundle.vim
 endif
 
 if has('autocmd')
@@ -15,7 +15,7 @@ set nowrap
 
 set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab textwidth=0
 set autoindent
-set nosmarttab
+set smarttab
 set smartindent
 
 set backspace=indent,eol,start
@@ -179,12 +179,16 @@ endfunction
 autocmd VimResized * :wincmd =
 
 augroup DetectIndent
-    autocmd!
-    autocmd BufReadPost * DetectIndent
+  autocmd!
+  autocmd BufReadPost * DetectIndent
 augroup END
 
 " Syntax check on write
-autocmd BufWritePost * Neomake
+augroup Neomake
+  autocmd!
+  let blacklist = ['cpp']
+  autocmd BufWritePost * if index(blacklist, &ft) < 0 | Neomake
+augroup END
 
 " Override xmlTag (JSX, really) as tag
 hi def link xmlTag Tag
