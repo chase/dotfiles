@@ -6,17 +6,13 @@ if has('vim_starting')
   set runtimepath+=~/.config/nvim/bundle/neobundle.vim
 endif
 
-if has('autocmd')
-  filetype plugin indent on
-endif
-
 let mapleader = ","
 set nowrap
 
 set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab textwidth=0
 set autoindent
 set smarttab
-set smartindent
+"set smartindent
 
 set backspace=indent,eol,start
 set complete-=i
@@ -64,10 +60,6 @@ endif
 
 if filereadable(expand("~/.config/nvim/bundles.vim"))
   source ~/.config/nvim/bundles.vim
-endif
-
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
 endif
 
 " Colorscheme
@@ -189,6 +181,13 @@ augroup Neomake
   let blacklist = ['cpp']
   autocmd BufWritePost * if index(blacklist, &ft) < 0 | Neomake
 augroup END
+
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
 
 " Override xmlTag (JSX, really) as tag
 hi def link xmlTag Tag
