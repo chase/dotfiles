@@ -141,55 +141,48 @@ nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-ac
 nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
 
 " {{{ Deoplete
-set completeopt+=noinsert
-set completeopt+=noselect
-
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  deoplete#mappings#smart_close_popup()
 
-function! s:at_whitespace() abort
-  let line = getline('.')
-  let cnum = col('.')
-  let point = cnum >= 2 ? line[:cnum - 2] : ''
-  return point =~ '^$' || point =~ '^\s$'
-endfunction
-
-inoremap <silent><expr><Tab> <SID>my_tab_function()
+inoremap <silent><Tab> <C-r>=<SID>my_tab_function()<CR>
 function! s:my_tab_function() abort
+  let result = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return result
+  endif
+
   if pumvisible()
     return "\<C-n>"
   endif
 
-  if neosnippet#expandable_or_jumpable()
-    return neosnippet#mappings#expand_or_jump_impl()
-  endif
-
-  if s:at_whitespace()
+  let line = getline('.')
+  let cnum = col('.')
+  let point = cnum >= 2 ? line[:cnum - 2] : ''
+  if point =~ '^$' || point =~ '\s$'
     return "\<Tab>"
   endif
 
   return deoplete#mappings#manual_complete()
 endfunction
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent><CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
-  if pumvisible() && neosnippet#expandable()
-    return neosnippet#mappings#expand_impl()
+  if pumvisible()
+    return deoplete#mappings#close_popup() . "\<CR>"
   endif
 
-  if s:at_whitespace()
+  let line = getline('.')
+  let cnum = col('.')
+  let point = cnum >= 2 ? line[:cnum - 2] : ''
+  if point =~ '^\s\+$'
     return "\<C-u>\<CR>"
   endif
 
-  return deoplete#mappings#close_popup() . "\<CR>"
+  return "\<CR>"
 endfunction
+" TODO: Consider making an smap for <CR> to exit snippet?
 " }}}
 
-" Neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-smap <expr><Tab> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 " }}}
 
 " Remove cruft

@@ -51,8 +51,8 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'rking/ag.vim'
 
 " Snippets
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 
 " {{{ Languages
 NeoBundle 'tpope/vim-git'

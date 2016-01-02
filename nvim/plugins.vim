@@ -69,17 +69,11 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " }}}
 
-" {{{ Neosnippet
-let g:neosnippet#enable_snipmate_compatibility = 0
-let g:neosnippet#disable_runtime_snippets = { '_': 1 }
-let g:neosnippet#snippets_directory =
-      \$HOME.'/.config/nvim/bundle/neosnippet-snippets/neosnippets,'
-      \.$HOME.'/.config/nvim/bundle/vim-go/gosnippets/snippets'
+" Damn it Ultisnips!
+let g:UltiSnipsExpandTrigger="<Plug>(UltiSnipsExpand)"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" vim-go, do not mess with my neosnippet config!
-let g:go_disable_autoinstall = 1
-let g:go_loaded_gosnippets = 1
-let g:go_snippet_engine = "neosnippet"
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
