@@ -31,6 +31,8 @@ let g:deoplete#enable_fuzzy_completion = 0
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
 
+let g:deoplete#sources#go = 'vim-go'
+
 " Define dictionary.
 let g:deoplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
@@ -65,6 +67,22 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" }}}
+
+" {{{ Neosnippet
+let g:neosnippet#enable_snipmate_compatibility = 0
+let g:neosnippet#disable_runtime_snippets = { '_': 1 }
+let g:neosnippet#snippets_directory =
+      \$HOME.'/.config/nvim/bundle/neosnippet-snippets/neosnippets,'
+      \.$HOME.'/.config/nvim/bundle/vim-go/gosnippets/snippets'
+
+" vim-go, do not mess with my neosnippet config!
+let g:go_disable_autoinstall = 1
+let g:go_loaded_gosnippets = 1
+let g:go_snippet_engine = "neosnippet"
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 " }}}
 
 " {{{ Vimfiler

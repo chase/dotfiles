@@ -50,6 +50,10 @@ NeoBundle 'tpope/vim-endwise'
 " Search
 NeoBundle 'rking/ag.vim'
 
+" Snippets
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+
 " {{{ Languages
 NeoBundle 'tpope/vim-git'
 NeoBundle 'fatih/vim-go'
@@ -80,6 +84,9 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'timcharper/textile.vim'
 NeoBundle 'chase/vim-airline-focuspoint'
 " }}}
+
+" Deoplete sources
+NeoBundle 'zchee/deoplete-go'
 
 if filereadable(expand("~/.config/nvim/plugins.vim"))
   source ~/.config/nvim/plugins.vim
