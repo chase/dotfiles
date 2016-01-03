@@ -31,8 +31,6 @@ let g:deoplete#enable_fuzzy_completion = 0
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
 
-let g:deoplete#sources#go = 'vim-go'
-
 " Define dictionary.
 let g:deoplete#sources#dictionary#dictionaries = {
     \ 'default' : '',

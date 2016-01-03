@@ -85,9 +85,6 @@ NeoBundle 'timcharper/textile.vim'
 NeoBundle 'chase/vim-airline-focuspoint'
 " }}}
 
-" Deoplete sources
-NeoBundle 'zchee/deoplete-go'
-
 if filereadable(expand("~/.config/nvim/plugins.vim"))
   source ~/.config/nvim/plugins.vim
 endif

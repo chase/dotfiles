@@ -144,15 +144,16 @@ nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  deoplete#mappings#smart_close_popup()
 
+inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-d>"
 inoremap <silent><Tab> <C-r>=<SID>my_tab_function()<CR>
 function! s:my_tab_function() abort
+  if pumvisible()
+    return "\<C-n>"
+  endif
+
   let result = UltiSnips#ExpandSnippetOrJump()
   if g:ulti_expand_or_jump_res > 0
     return result
-  endif
-
-  if pumvisible()
-    return "\<C-n>"
   endif
 
   let line = getline('.')
@@ -168,6 +169,11 @@ endfunction
 inoremap <silent><CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
   if pumvisible()
+    let result = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+      return result
+    endif
+
     return deoplete#mappings#close_popup() . "\<CR>"
   endif
 
