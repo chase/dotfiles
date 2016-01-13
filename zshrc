@@ -81,6 +81,8 @@ export LANG=en_US.UTF-8
 export EDITOR=nvim
 export BROWSER=google-chrome
 
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
