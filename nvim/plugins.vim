@@ -104,8 +104,8 @@ let g:neomake_warning_sign = { 'text': 'W>',  'texthl': 'SpellCap' }
 " {{{ Airline
 if neobundle#tap('vim-airline')
   let g:airline#extensions#default#layout = [
-    \ [ 'a', 'b', 'c' ],
-    \ [ 'x', 'y', 'warning' ]
+    \ [ 'a', 'x', 'c' ],
+    \ [ 'y', 'b', 'warning' ]
     \ ]
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 2
@@ -113,7 +113,7 @@ if neobundle#tap('vim-airline')
 
   let g:airline_powerline_fonts = 1
   function! neobundle#hooks.on_post_source(bundle)
-    let g:airline_section_x = g:airline#section#create_right(['%{g:airline_symbols.linenr} %l', '%c'])
+    let g:airline_section_x = g:airline#section#create_left(['%{g:airline_symbols.linenr} %l:%c'])
     let g:airline_section_y = g:airline#section#create(['filetype'])
   endfunction
 
