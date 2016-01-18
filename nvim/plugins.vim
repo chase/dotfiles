@@ -107,6 +107,10 @@ if neobundle#tap('vim-airline')
     \ [ 'a', 'x', 'c' ],
     \ [ 'y', 'b', 'warning' ]
     \ ]
+  let g:airline#extensions#default#section_truncate_width = {
+        \ 'y': 80,
+        \ 'b': 80,
+        \}
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 2
   let g:airline#extensions#tabline#tab_min_count = 2
