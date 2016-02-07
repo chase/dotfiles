@@ -15,11 +15,12 @@ set smarttab
 "set smartindent
 
 set backspace=indent,eol,start
-set complete-=i
 
 set nrformats-=octal
 set ttimeout
 set ttimeoutlen=100
+
+set completeopt-=preview
 
 set diffopt+=vertical
 set foldmethod=indent foldnestmax=2 foldlevelstart=1 nofoldenable
@@ -123,7 +124,7 @@ if neobundle#tap('vim-dispatch')
 endif
 
 " Swap two words
-nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""`'
 
 " Shift-insert for mouse-less middle-click
 map! <S-Insert> <MiddleMouse>
