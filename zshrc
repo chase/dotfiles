@@ -79,7 +79,7 @@ export PATH="$PATH:$GOPATH/bin"
 export LANG=en_US.UTF-8
 
 export EDITOR=nvim
-export BROWSER=google-chrome
+export BROWSER=google-chrome-unstable
 
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
