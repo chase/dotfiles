@@ -124,7 +124,7 @@ if neobundle#tap('vim-dispatch')
 endif
 
 " Swap two words
-nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""`'
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""<CR>
 
 " Shift-insert for mouse-less middle-click
 map! <S-Insert> <MiddleMouse>
