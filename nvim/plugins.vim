@@ -105,34 +105,20 @@ let g:neomake_warning_sign = { 'text': 'W>',  'texthl': 'SpellCap' }
 " }}}
 
 " {{{ Airline
-if neobundle#tap('vim-airline')
-  let g:airline#extensions#default#layout = [
-    \ [ 'a', 'x', 'c' ],
-    \ [ 'y', 'b', 'warning' ]
-    \ ]
-  let g:airline#extensions#default#section_truncate_width = {
-        \ 'y': 80,
-        \ 'b': 80,
-        \}
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_min_count = 2
-  let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline_theme = 'focuspoint'
+let g:airline#extensions#default#layout = [
+  \ [ 'a', 'x', 'c' ],
+  \ [ 'y', 'b', 'warning' ]
+  \ ]
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'y': 80,
+      \ 'b': 80,
+      \}
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 2
 
-  let g:airline_powerline_fonts = 1
-  function! neobundle#hooks.on_post_source(bundle)
-    let g:airline_section_x = g:airline#section#create_left(['%{g:airline_symbols.linenr} %l:%c'])
-    let g:airline_section_y = g:airline#section#create(['filetype'])
-  endfunction
-
-  call neobundle#untap()
-endif
-
-if neobundle#tap('vim-airline-focuspoint')
-  function! neobundle#hooks.on_post_source(bundle)
-    AirlineTheme focuspoint
-    AirlineRefresh
-  endfunction
-
-  call neobundle#untap()
-endif
+let g:airline_powerline_fonts = 1
+let g:airline_section_x = g:airline#section#create_left(['%{g:airline_symbols.linenr} %l:%c'])
+let g:airline_section_y = g:airline#section#create(['filetype'])
 " }}}

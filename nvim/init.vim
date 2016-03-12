@@ -2,10 +2,6 @@
 " Note: Skip initialization for vim-tiny or vim-small
 if !1 | finish | endif
 
-if has('vim_starting')
-  set runtimepath+=~/.config/nvim/bundle/neobundle.vim
-endif
-
 let mapleader = ","
 set nowrap
 
@@ -82,46 +78,33 @@ nnoremap <A-l> <C-w>l
 " Disable help key
 map <S-k> <nop>
 
-if neobundle#tap('vim-easy-align')
-  vmap <CR>   <Plug>(EasyAlign)
-  nmap <Leader>a <Plug>(EasyAlign)
+vmap <CR>   <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
 
-  call neobundle#untap()
-endif
+nmap <Leader>T   <Plug>(easymotion-Tl)
+nmap <Leader>t   <Plug>(easymotion-tl)
+nmap <Leader>s   <Plug>(easymotion-sl)
+nmap <Leader>F   <Plug>(easymotion-Fl)
+nmap <Leader>f   <Plug>(easymotion-fl)
+omap T   <Plug>(easymotion-Tl)
+omap t   <Plug>(easymotion-tl)
+omap s   <Plug>(easymotion-sl)
+omap F   <Plug>(easymotion-Fl)
+omap f   <Plug>(easymotion-fl)
+omap W   <Plug>(easymotion-Wl)
+omap w   <Plug>(easymotion-wl)
+omap b   <Plug>(easymotion-bl)
+omap B   <Plug>(easymotion-Bl)
 
-if neobundle#tap('vim-easymotion')
-  nmap <Leader>T   <Plug>(easymotion-Tl)
-  nmap <Leader>t   <Plug>(easymotion-tl)
-  nmap <Leader>s   <Plug>(easymotion-sl)
-  nmap <Leader>F   <Plug>(easymotion-Fl)
-  nmap <Leader>f   <Plug>(easymotion-fl)
-  omap T   <Plug>(easymotion-Tl)
-  omap t   <Plug>(easymotion-tl)
-  omap s   <Plug>(easymotion-sl)
-  omap F   <Plug>(easymotion-Fl)
-  omap f   <Plug>(easymotion-fl)
-  omap W   <Plug>(easymotion-Wl)
-  omap w   <Plug>(easymotion-wl)
-  omap b   <Plug>(easymotion-bl)
-  omap B   <Plug>(easymotion-Bl)
+nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
 
-  call neobundle#untap()
-endif
-
-if neobundle#tap('vimfiler.vim')
-  nnoremap <silent> <Leader>n :VimFilerBufferDir -toggle -split -winwidth=0 -explorer<CR>
-
-  call neobundle#untap()
-endif
 nmap <silent> <Leader>s :vsplit +term<CR>
 
 nmap <Leader><CR> :setl foldmethod=marker<CR>
 
 nmap <silent> <Leader>cd :lcd %:h<CR>
 
-if neobundle#tap('vim-dispatch')
-  nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
-endif
+nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""<CR>
@@ -130,12 +113,8 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""<CR>
 map! <S-Insert> <MiddleMouse>
 
 " NerdCommenter!
-if neobundle#tap('nerdcommenter')
-  nmap <Leader>/ <plug>NERDCommenterToggle<CR>
-  vmap <Leader>/ <plug>NERDCommenterToggle<CR>
-
-  call neobundle#untap()
-endif
+nmap <Leader>/ <plug>NERDCommenterToggle<CR>
+vmap <Leader>/ <plug>NERDCommenterToggle<CR>
 
 " Unite
 nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>

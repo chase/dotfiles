@@ -8,8 +8,9 @@ if type nvim; then
         [ -e ~/.nvim ] && rm -rf ~/.nvim
         mkdir -p ~/.config/nvim/bundle
         for file in $abspath/nvim/*; { ln -s $file ~/.config/nvim/; }
-        git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim
-        nvim -N -u ~/.config/nvim/init.vim -c 'try | NeoBundleInstall | finally | qall! | endtry' -U NONE -i NONE -e -s
+        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        nvim -N -u ~/.config/nvim/init.vim -c 'try | PlugInstall | finally | qall! | endtry' -U NONE -i NONE -e -s
         nvim +'silent UpdateRemotePlugins' +qall
     }
 fi

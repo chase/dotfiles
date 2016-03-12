@@ -1,94 +1,87 @@
 " vim: foldmethod=marker foldlevel=0
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 " Colorscheme
-NeoBundle 'chase/focuspoint-vim'
+Plug 'chase/focuspoint-vim'
 
 " Libraries
-NeoBundle 'Shougo/vimproc.vim', {'build':{'linux': 'make'}}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'mattn/webapi-vim'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'Shougo/unite.vim'
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mattn/webapi-vim'
 
 " Display
-NeoBundle 'bling/vim-airline'
-NeoBundle 'junegunn/goyo.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'ap/vim-css-color'
-NeoBundle 'roryokane/detectindent'
+Plug 'bling/vim-airline' | Plug 'chase/vim-airline-focuspoint'
+Plug 'junegunn/goyo.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ap/vim-css-color'
+Plug 'roryokane/detectindent'
 
 " Tools
-NeoBundle 'tpope/vim-fugitive', {'augroup': 'fugitive'}
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
+Plug 'tpope/vim-fugitive', {'as': 'fugitive'}
+Plug 'airblade/vim-gitgutter'
+Plug 'Shougo/vimfiler.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
 
 " Error checks
-NeoBundle 'benekastah/neomake'
+Plug 'benekastah/neomake'
 
 " Motion
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'edsono/vim-matchit'
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'thinca/vim-visualstar'
-
-" Code assist
-NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'osyo-manga/vim-marching'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tpope/vim-endwise'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'edsono/vim-matchit'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'thinca/vim-visualstar'
 
 " Search
-NeoBundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 " Snippets
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " {{{ Languages
-NeoBundle 'tpope/vim-git'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'leafo/moonscript-vim'
+Plug 'tpope/vim-git'
+Plug 'fatih/vim-go'
+Plug 'leafo/moonscript-vim'
 
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mmalecki/vim-node.js'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'elzr/vim-json'
+Plug 'kchmck/vim-coffee-script'
 
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'tpope/vim-haml'
+Plug 'pangloss/vim-javascript' | Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json'
 
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'cakebaker/scss-syntax.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-haml'
 
-NeoBundle 'ajf/puppet-vim'
+Plug 'groenewege/vim-less'
+Plug 'cakebaker/scss-syntax.vim'
 
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'sunaku/vim-ruby-minitest'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'skwp/vim-rspec'
+Plug 'ajf/puppet-vim'
 
-NeoBundle 'depuracao/vim-rdoc'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'timcharper/textile.vim'
-NeoBundle 'chase/vim-airline-focuspoint'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-cucumber'
+Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'skwp/vim-rspec', {'for': 'ruby'}
+Plug 'depuracao/vim-rdoc', {'for': 'ruby'}
+
+Plug 'tpope/vim-markdown'
+Plug 'timcharper/textile.vim'
 " }}}
 
-NeoBundle 'zchee/deoplete-go', {'build':{'linux': 'make'}}
+" Code assist
+Plug 'Shougo/deoplete.nvim' |
+      \Plug 'zchee/deoplete-go', {'do': 'make'}
+Plug 'osyo-manga/vim-marching'
+Plug 'mattn/emmet-vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-endwise'
+call plug#end()
 
 if filereadable(expand("~/.config/nvim/plugins.vim"))
   source ~/.config/nvim/plugins.vim
 endif
-
-call neobundle#end()
