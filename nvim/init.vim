@@ -59,6 +59,10 @@ if filereadable(expand("~/.config/nvim/bundles.vim"))
   source ~/.config/nvim/bundles.vim
 endif
 
+if filereadable(expand("~/.config/nvim/plugins.vim"))
+  source ~/.config/nvim/plugins.vim
+endif
+
 " Colorscheme
 color focuspoint
 

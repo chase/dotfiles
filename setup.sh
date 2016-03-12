@@ -8,9 +8,12 @@ if type nvim; then
         [ -e ~/.nvim ] && rm -rf ~/.nvim
         mkdir -p ~/.config/nvim/bundle
         for file in $abspath/nvim/*; { ln -s $file ~/.config/nvim/; }
+        echo "Downloading plug.vim"
         curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        nvim -N -u ~/.config/nvim/init.vim -c 'try | PlugInstall | finally | qall! | endtry' -U NONE -i NONE -e -s
+        echo "Installing Plug bundles"
+        nvim -N --noplugin --headless -u ~/.config/nvim/bundles.vim -c 'PlugInstall | qall!' -e -s -i NONE
+        echo "Updating Python-based plugins"
         nvim +'silent UpdateRemotePlugins' +qall
     }
 fi
