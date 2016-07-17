@@ -39,7 +39,6 @@
 	pager = zsh -c '/usr/share/git/diff-highlight/diff-highlight | less -r' -
 [url "git@github.com:"]
 	insteadOf = "gh:"
-	insteadOf = "git://github.com"
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
 	pushInsteadOf = "https://github.com/"
