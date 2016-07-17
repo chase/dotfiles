@@ -13,10 +13,17 @@ set smarttab
 set backspace=indent,eol,start
 
 set nrformats-=octal
-set ttimeout
-set ttimeoutlen=100
 
-set completeopt-=preview
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+augroup END
+
+set completeopt=menu,menuone
 
 set diffopt+=vertical
 set foldmethod=indent foldnestmax=2 foldlevelstart=1 nofoldenable
@@ -30,17 +37,21 @@ set wrapscan
 
 set laststatus=2
 set showcmd
+set noshowmode
+set nocursorcolumn
 
 set scrolloff=5
 set sidescrolloff=5
 set display+=lastline
+
+set lazyredraw
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
 set autoread
-set fileformats+=mac
+set fileformats=unix,dos,mac
 
 if &history < 1000
   set history=1000
@@ -109,6 +120,9 @@ nmap <Leader><CR> :setl foldmethod=marker<CR>
 nmap <silent> <Leader>cd :lcd %:h<CR>
 
 nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
+
+" Prevent q: window from poppy up
+map q: :q
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR> :let @/=""<CR>
