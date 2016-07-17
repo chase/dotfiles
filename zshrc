@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
+#zmodload zsh/zprof
 export ZSH=$HOME/.oh-my-zsh
 
-alias git='noglob hub'
 alias hg='noglob hg'
 alias bower='noglob bower'
 
@@ -52,7 +52,7 @@ ZSH_CUSTOM=~/.zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dircycle golang docker npm systemd themes z)
+plugins=(gitfast dircycle golang docker npm systemd themes z)
 
 # OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
@@ -71,9 +71,6 @@ export VAGRANT_DEFAULT_PROVIDER=docker
 
 export GOPATH=~/go
 export PATH="$PATH:$GOPATH/bin"
-
-# Node Version Manger
-[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -135,3 +132,33 @@ setopt menu_complete
 unsetopt complete_in_word
 # <enter> selects menu and returns
 bindkey -M menuselect '^M' accept-line.send-break
+# Don't confirm histroy expansion (!! or $!)
+setopt no_hist_verify
+
+#Docker functions from jfrazelle/dotfiles
+#MIT License (MIT)
+#Copyright (c) 2015 Jessie Frazelle
+function dcleanup(){
+  docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+function del_stopped(){
+  local name=$1
+  local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+
+  if [[ "$state" == "false" ]]; then
+    docker rm $name
+  fi
+}
+function relies_on(){
+  local containers=$@
+
+  for container in $containers; do
+    local state=$(docker inspect --format "{{.State.Running}}" $container 2>/dev/null)
+
+    if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+      echo "$container is not running, starting it for you."
+      $container
+    fi
+  done
+}
