@@ -135,11 +135,6 @@ function! s:my_tab_function() abort
     return "\<C-n>"
   endif
 
-  let result = UltiSnips#ExpandSnippetOrJump()
-  if g:ulti_expand_or_jump_res > 0
-    return result
-  endif
-
   let line = getline('.')
   let cnum = col('.')
   let point = cnum >= 2 ? line[:cnum - 2] : ''

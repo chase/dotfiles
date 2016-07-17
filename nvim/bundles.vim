@@ -73,11 +73,19 @@ Plug 'timcharper/textile.vim'
 " }}}
 
 " Code assist
-Plug 'Shougo/deoplete.nvim' |
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', {'do': function('DoRemote')} |
       \Plug 'zchee/deoplete-go', {'do': 'make'}
 Plug 'osyo-manga/vim-marching'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-endwise'
+
+" Deoplete sources
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'carlitux/deoplete-ternjs'
+Plug 'zchee/deoplete-jedi' " Python
 call plug#end()

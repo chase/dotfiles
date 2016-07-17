@@ -25,27 +25,27 @@ let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:deoplete#sources#syntax#min_keyword_length = 3
 let g:deoplete#enable_fuzzy_completion = 0
 
 " Shell style
+let g:deoplete#auto_completion_start_length = 1
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
 
 let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources.go = ['buffer', 'member', 'tag', 'file']
+let g:deoplete#ignore_sources.go = ['buffer', 'member', 'tag', 'file', 'neosnippet']
+let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+let g:deoplete#sources#go#align_class = 1
 
-" Define dictionary.
-let g:deoplete#sources#dictionary#dictionaries = {
-    \ 'default' : ''
-\ }
-
-" Define keyword.
-if !exists('g:deoplete#keyword_patterns')
-    let g:deoplete#keyword_patterns = {}
-endif
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-
+call deoplete#custom#set('_', 'matchers', ['matcher_head'])
+call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+call deoplete#custom#set('go', 'rank', 9999)
+call deoplete#custom#set('jedi', 'rank', 9999)
+call deoplete#custom#set('tern', 'rank', 9999)
+call deoplete#custom#set('omni', 'rank', 9999)
+call deoplete#custom#set('ultisnips', 'rank', 5000)
+call deoplete#custom#set('ultisnips', 'min_pattern_length', 0)
 " Clang support
 let g:marching_clang_command = "/usr/bin/clang"
 let g:marching_enable_deoplete = 1
@@ -68,6 +68,11 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0
 " }}}
 
 " Damn it Ultisnips!
