@@ -52,7 +52,7 @@ ZSH_CUSTOM=~/.zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast dircycle golang docker npm systemd themes z)
+plugins=(gitfast dircycle golang docker npm systemd themes z httpie)
 
 # OH MY ZSH!
 source $ZSH/oh-my-zsh.sh
