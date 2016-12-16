@@ -1,9 +1,18 @@
 " vim: foldmethod=marker foldlevel=0
 " Plugin Settings
 "
+
+" Javascript/JSON
 let g:vim_json_syntax_conceal = 0
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
+let g:tern_request_timeout = 1
+" Use tern_for_vim.
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
+let g:splitjoin_trailing_comma = 1
+
 let g:gitgutter_eager = 0
 let g:gitgutter_realtime = 0
 let g:gitgutter_signs = 0
@@ -36,13 +45,23 @@ let g:deoplete#ignore_sources = {}
 let g:deoplete#ignore_sources.go = ['buffer', 'member', 'tag', 'file', 'neosnippet']
 let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
+" Define dictionary.
+let g:deoplete#sources#dictionary#dictionaries = {
+    \ 'default' : ''
+\ }
+
+" Define keyword.
+if !exists('g:deoplete#keyword_patterns')
+    let g:deoplete#keyword_patterns = {}
+endif
+let g:deoplete#keyword_patterns['default'] = '\h\w*'
 
 call deoplete#custom#set('_', 'matchers', ['matcher_head'])
-call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+call deoplete#custom#set('_', 'sorter', ['matcher_head'])
+call deoplete#custom#set('_', 'converters', ['converter_remove_paren', 'converter_remove_verlap'])
 call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
 call deoplete#custom#set('go', 'rank', 9999)
 call deoplete#custom#set('jedi', 'rank', 9999)
-call deoplete#custom#set('tern', 'rank', 9999)
 call deoplete#custom#set('omni', 'rank', 9999)
 call deoplete#custom#set('ultisnips', 'rank', 5000)
 call deoplete#custom#set('ultisnips', 'min_pattern_length', 0)

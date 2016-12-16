@@ -36,7 +36,6 @@ set incsearch
 set wrapscan
 
 set laststatus=2
-set showcmd
 set noshowmode
 set nocursorcolumn
 
@@ -60,11 +59,6 @@ if !empty(&viminfo)
   set viminfo^=!
 endif
 set sessionoptions-=options
-
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
 
 if filereadable(expand("~/.config/nvim/bundles.vim"))
   source ~/.config/nvim/bundles.vim
@@ -96,11 +90,6 @@ map <S-k> <nop>
 vmap <CR>   <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
-nmap <Leader>T   <Plug>(easymotion-Tl)
-nmap <Leader>t   <Plug>(easymotion-tl)
-nmap <Leader>s   <Plug>(easymotion-sl)
-nmap <Leader>F   <Plug>(easymotion-Fl)
-nmap <Leader>f   <Plug>(easymotion-fl)
 omap T   <Plug>(easymotion-Tl)
 omap t   <Plug>(easymotion-tl)
 omap s   <Plug>(easymotion-sl)
@@ -121,6 +110,15 @@ nmap <silent> <Leader>cd :lcd %:h<CR>
 
 nmap <silent> <Leader>md :Dispatch! mkdir -p %:p:h<CR>
 
+nmap <silent> <Leader>b :Unite buffer<CR>
+
+nnoremap <silent> <Leader><space> :nohlsearch<CR>
+
+" Center screen
+nnoremap <silent> <space> zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Prevent q: window from poppy up
 map q: :q
 
@@ -135,8 +133,8 @@ nmap <Leader>/ <plug>NERDCommenterToggle<CR>
 vmap <Leader>/ <plug>NERDCommenterToggle<CR>
 
 " Unite
-nmap <Leader>; :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
-nmap <Leader>' :UniteWithBufferDir -start-insert file_rec/async<CR>
+nmap <Leader>d :UniteWithBufferDir -start-insert directory_rec/async -default-action=cd<CR>
+nmap <Leader>f :UniteWithBufferDir -start-insert file_rec/async<CR>
 
 " {{{ Deoplete
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
@@ -159,7 +157,17 @@ function! s:my_tab_function() abort
   return deoplete#mappings#manual_complete()
 endfunction
 
-inoremap <silent><CR> <C-r>=<SID>my_cr_function()<CR>
+function! ExpandPossibleShorterSnippet()
+  if len(UltiSnips#SnippetsInCurrentScope()) == 1 "only one candidate...
+    let curr_key = keys(UltiSnips#SnippetsInCurrentScope())[0]
+    normal diw
+    exe "normal a" . curr_key
+    exe "normal a "
+    return 1
+  endif
+  return 0
+endfunction
+
 function! s:my_cr_function() abort
   if pumvisible()
     let result = UltiSnips#ExpandSnippetOrJump()
@@ -176,9 +184,9 @@ function! s:my_cr_function() abort
   if point =~ '^\s\+$'
     return "\<C-u>\<CR>"
   endif
-
-  return "\<CR>"
+  return (line =~ '^\s*\S\+$' && ExpandPossibleShorterSnippet() == 1) ? UltiSnips#ExpandSnippet() : "\<CR>"
 endfunction
+inoremap <silent><CR> <C-R>=<SID>my_cr_function()<CR>
 " TODO: Consider making an smap for <CR> to exit snippet?
 " }}}
 

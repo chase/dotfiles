@@ -21,9 +21,14 @@ Plug 'roryokane/detectindent'
 " Tools
 Plug 'tpope/vim-fugitive', {'as': 'fugitive'}
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
 Plug 'Shougo/vimfiler.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch' " :SudoEdit/SudoWrite
+
+" Convert to camelCase (crc), dash-case (cr-)
+" :Subvert/object{,s}/class{,}/g
+Plug 'tpope/vim-abolish'
 
 " Error checks
 Plug 'benekastah/neomake'
@@ -42,34 +47,11 @@ Plug 'rking/ag.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug '~/Development/vim-react-snippets'
 
 " {{{ Languages
-Plug 'tpope/vim-git'
-Plug 'fatih/vim-go'
+Plug 'sheerun/vim-polyglot'
 Plug 'leafo/moonscript-vim'
-
-Plug 'kchmck/vim-coffee-script'
-
-Plug 'pangloss/vim-javascript' | Plug 'mxw/vim-jsx'
-Plug 'elzr/vim-json'
-
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'tpope/vim-haml'
-
-Plug 'groenewege/vim-less'
-Plug 'cakebaker/scss-syntax.vim'
-
-Plug 'ajf/puppet-vim'
-
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-cucumber'
-Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-Plug 'skwp/vim-rspec', {'for': 'ruby'}
-Plug 'depuracao/vim-rdoc', {'for': 'ruby'}
-
-Plug 'tpope/vim-markdown'
-Plug 'timcharper/textile.vim'
 " }}}
 
 " Code assist
@@ -79,13 +61,13 @@ endfunction
 Plug 'Shougo/deoplete.nvim', {'do': function('DoRemote')} |
       \Plug 'zchee/deoplete-go', {'do': 'make'}
 Plug 'osyo-manga/vim-marching'
-Plug 'mattn/emmet-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-endwise'
+Plug '~/Development/splitjoin.vim'
 
 " Deoplete sources
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
-Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-jedi' " Python
+
 call plug#end()
