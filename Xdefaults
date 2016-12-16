@@ -44,29 +44,31 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 
 ! Save number lines in the scrollback buffer [default 64]. This resource is limited on most machines to 65535; option -sl.
-URxvt*saveLines: 1024
+URxvt*saveLines: 4096
 
 ! Compile frills: Disable the usage of the built-in block graphics/line drawing characters and just rely on what the specified fonts provide. Use this if you have a good font
 URxvt*skipBuiltinGlyphs: true
 
 ! .Xcolors
 ! Atom Dark One
-*.foreground: #abb2bf
+*.foreground: #c3c6ca
 *.background: #282c34
 *.cursorColor: #abb2bf
 
+*.color0: #282c34
 *.color1: #e06c75
 *.color2: #98c379
 *.color3: #d19a66
-*.color4: #56b6c2
+*.color4: #5186B4
 *.color5: #c678dd
 *.color6: #56b6c2
-*.color7: #d0d0d0
+*.color7: #abb2bf
+
 *.color8: #808080
 *.color9: #e06c75
 *.color10: #98c379
 *.color11: #d19a66
-*.color12: #56b6c2
+*.color12: #61afef
 *.color13: #c678dd
 *.color14: #56b6c2
 *.color15: #ffffff
